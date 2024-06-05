@@ -9,3 +9,4 @@ rm -rf $DIST_PATH
 
 mkdir -p $DIST_PATH/documents
 cp $SOURCE_PATH/doc/openapi.yml $DIST_PATH/documents
+cp $ROOT_PATH/swagger/* $DIST_PATH/documents

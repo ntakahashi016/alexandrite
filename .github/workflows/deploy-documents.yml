@@ -2,8 +2,7 @@ name: Deploy documents to Pages
 
 on:
   push:
-    branches:
-      - ["main"]
+    branches: ["main"]
   workflow_dispatch:
 
 premissions:

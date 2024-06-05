@@ -1,0 +1,672 @@
+openapi: 3.0.0
+info:
+  version: 0.0.0
+  title: Alex API
+  description: >-
+    Alex is a simple library management system.
+servers:
+  - url: 'http://{host}:8081/api/v1'
+    description: go service api server endpoint application
+    variables:
+      host:
+        default: localhost
+        enum:
+          - localhost
+tags:
+  - name: user
+    description: User management.
+  - name: lending
+    description: Lending management.
+  - name: history
+    description: History management.
+  - name: book
+    description: Book management.
+paths:
+  "/user/{id}":
+    get:
+      tags:
+        - user
+      summary: Get user information.
+      description: |
+        Get user information.
+      deprecated: false
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+          example: "1"
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+              examples:
+                user:
+                  $ref: "#/components/examples/user"
+    delete:
+      tags:
+        - user
+      summary: Delete a user.
+      description: |
+        Delete a user.
+      deprecated: false
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+          example: "1"
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  data:
+                    type: object
+                    example: null
+    patch:
+      tags:
+        - user
+      summary: Change user information.
+      description: |
+        Change user information.
+      deprecated: false
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+          example: "1"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/user"
+            examples:
+              user:
+                $ref: "#/components/examples/user"
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+              examples:
+                user:
+                  $ref: "#/components/examples/user"
+  "/users":
+    post:
+      tags:
+        - user
+      summary: Create a user.
+      description: |
+        Create a user.
+      deprecated: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: John Smith
+              required:
+                - name
+      responses:
+        '200':
+          description: User registration succeeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+              examples:
+                users:
+                  $ref: "#/components/examples/user"
+    get:
+      tags:
+        - user
+      summary: Get users list.
+      Description: |
+        Get users list
+      deprecated: false
+      responses:
+        "200":
+          description: Getting user list is succeeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/users"
+              examples:
+                users:
+                  $ref: "#/components/examples/users"
+  "/lending/{id}":
+    get:
+      tags:
+        - lending
+      summary: Get a lending.
+      description: |
+        Get a lending.
+      deprecated: false
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+          example: "1"
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/lending"
+              examples:
+                lending:
+                  $ref: "#/components/examples/lending"
+    delete:
+      tags:
+        - lending
+      summary: Delete a lending.
+      description: |
+        Delete a lending.
+      deprecated: false
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+          example: "1"
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  data:
+                    type: object
+                    example: null
+    patch:
+      tags:
+        - lending
+      summary: Change lending information.
+      description: |
+        Change lending information.
+      deprecated: false
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+          example: "1"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/lending"
+            examples:
+              lending:
+                $ref: "#/components/examples/lending"
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/lending"
+              examples:
+                lending:
+                  $ref: "#/components/examples/lending"
+  "/lendings":
+    post:
+      tags:
+        - lending
+      summary: Create a lending.
+      description: |
+        Create a lending.
+      deprecated: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/lendings"
+            examples:
+              lendings:
+                $ref: "#/components/examples/lendings"
+      responses:
+        '200':
+          description: Lending registration succeeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/lendings"
+              examples:
+                lendings:
+                  $ref: "#/components/examples/lendings"
+        '500':
+          $ref: '#/components/responses/500Error'
+    get:
+      tags:
+        - lending
+      summary: Get lendings list.
+      description: |
+        Get lendings list.
+      deprecated: false
+      responses:
+        "200":
+          description: Getting lending list is succeeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/lendings"
+              examples:
+                lendings:
+                  $ref: "#/components/examples/lendings"
+  "/history/{id}":
+    get:
+      tags:
+        - history
+      summary: Get a detail of history.
+      description: |
+        Get a detail of history.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+          example: "1"
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/history"
+              examples:
+                history:
+                  $ref: "#/components/examples/history"
+  "/histories":
+    get:
+      tags:
+        - history
+      summary: Get a list of historyies.
+      description: |
+        Get a list of histories.
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/histories"
+              examples:
+                histories:
+                  $ref: "#/components/examples/histories"
+  "/book/{id}":
+    get:
+      tags:
+        - book
+      summary: Get book information.
+      description: |
+        Get book information.
+      deprecated: false
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+          example: "1"
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/book"
+              examples:
+                book:
+                  $ref: "#/components/examples/book"
+    delete:
+      tags:
+        - book
+      summary: Delete a book.
+      description: |
+        Delete a book.
+      deprecated: false
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+          example: "1"
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  data:
+                    type: object
+                    example: null
+    patch:
+      tags:
+        - book
+      summary: Change a book.
+      description: |
+        Change a book.
+      deprecated: false
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+          example: "1"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/book"
+            examples:
+              book:
+                $ref: "#/components/examples/book"
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/book"
+              examples:
+                book:
+                  $ref: "#/components/examples/book"
+  "/books":
+    post:
+      tags:
+        - book
+      summary: Create a book.
+      description: |
+        Create a book.
+      deprecated: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/books"
+            examples:
+              books:
+                $ref: "#/components/examples/books"
+      responses:
+        '200':
+          description: Book registration succeeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/books"
+              examples:
+                books:
+                  $ref: "#/components/examples/books"
+        '500':
+          $ref: '#/components/responses/500Error'
+    get:
+      tags:
+        - book
+      summary: Getting book list is succeeded
+      description: |
+        Get books list.
+      responses:
+        "200":
+          description: Getting book list is succeeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/books"
+              examples:
+                books:
+                  $ref: "#/components/examples/books"
+components:
+  responses:
+    400Error:
+      description: |
+        Bad request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: integer
+                format: int64
+                example: "400"
+              method:
+                type: string
+                example: "POST"
+              message:
+                type: string
+                example: "Bad request"
+              data:
+                type: object
+                exapmle: null
+    401Error:
+      description: |
+        Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: integer
+                format: int64
+                example: "401"
+              method:
+                type: string
+                example: "POST"
+              message:
+                type: string
+                example: "Unauthorized"
+              data:
+                type: object
+                exapmle: null
+    403Error:
+      description: |
+        Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: integer
+                format: int64
+                example: "403"
+              method:
+                type: string
+                example: "POST"
+              message:
+                type: string
+                example: "Forbidden"
+              data:
+                type: object
+                exapmle: null
+    500Error:
+      description: |
+        Internal server error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: integer
+                format: int64
+                example: "500"
+              method:
+                type: string
+                example: "POST"
+              message:
+                type: string
+                example: "Internal server error occured"
+              data:
+                type: object
+                example: null
+  schemas:
+    user:
+      type: "object"
+      properties:
+        id:
+          type: integer
+          format: number
+        name:
+          type: string
+    users:
+      type: array
+      items:
+        $ref: "#/components/schemas/user"
+    lending:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: number
+        userId:
+          type: integer
+          format: number
+        bookId:
+          type: integer
+          format: number
+        lentDate:
+          type: string
+        dueDate:
+          type: string
+    lendings:
+      type: array
+      items:
+        $ref: "#/components/schemas/lending"
+    history:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: number
+        userId:
+          type: integer
+          format: number
+        bookId:
+          type: integer
+          format: number
+        lentDate:
+          type: string
+        returnDate:
+          type: string
+    histories:
+      type: array
+      items:
+        $ref: "#/components/schemas/history"
+    book:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: number
+        isbn:
+          type: integer
+          format: number
+        title:
+          type: string
+        author:
+          type: string
+    books:
+      type: array
+      items:
+        $ref: "#/components/schemas/book"
+  examples:
+    user:
+      summary: "user"
+      value:
+        id: 1
+        name: John Smith
+    users:
+      summary: "users"
+      value:
+        - id: 1
+          name: John Smith
+        - id: 2
+          name: Alice Brown
+    lending:
+      summary: "lending"
+      value:
+        id: 1
+        userId: 1
+        bookId: 1
+        lntDate: yyyy/mm/dd
+        dueDate: yyyy/mm/dd
+    lendings:
+      summary: "lendings"
+      value:
+      - id: 1
+        userId: 1
+        bookId: 1
+        lntDate: yyyy/mm/dd
+        dueDate: yyyy/mm/dd
+      - id: 2
+        userId: 1
+        bookId: 2
+        lntDate: yyyy/mm/dd
+        dueDate: yyyy/mm/dd
+    history:
+      summary: "history"
+      value:
+        id: 1
+        userId: 1
+        bookId: 1
+        lntDate: yyyy/mm/dd
+        returnDate: yyyy/mm/dd
+    histories:
+      summary: "histories"
+      value:
+        - id: 1
+          userId: 1
+          bookId: 1
+          lntDate: yyyy/mm/dd
+          returnDate: yyyy/mm/dd
+        - id: 2
+          userId: 1
+          bookId: 2
+          lntDate: yyyy/mm/dd
+          returnDate: yyyy/mm/dd
+    book:
+      summary: "book"
+      value:
+        id: 1
+        isbn: 1234567890123
+        title: "example title"
+        author: "example author"
+    books:
+      summary: "books"
+      value:
+        - id: 1
+          isbn: 1234567890123
+          title: "example title 1"
+          author: "example author 1"
+        - id: 2
+          isbn: 2345678901234
+          title: "example title 2"
+          author: "example author 2"
+          

@@ -2,7 +2,7 @@
 
 BIN_PATH="$(dirname -- ${0})"
 ROOT_PATH="$BIN_PATH/../"
-SOURCE_PATH="$BIN_PATH/../document"
+SOURCE_PATH="$BIN_PATH/../documents"
 DIST_PATH="$BIN_PATH/../dist"
 
 rm -rf $DIST_PATH

@@ -2,8 +2,8 @@
 !.gitignore
 !LICENSE
 !README.md
-!app/
-!documents/
+!app/*
+!documents/*
 
 ################################################################
 # for dart

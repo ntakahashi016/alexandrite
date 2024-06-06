@@ -14,21 +14,21 @@ servers:
           - localhost
 tags:
   - name: user
-    description: User management.
+    description: User management endponts.
   - name: lending
-    description: Lending management.
+    description: Lending management endpoints.
   - name: history
-    description: History management.
+    description: History management endpoints.
   - name: book
-    description: Book management.
+    description: Book management endpoints.
 paths:
   "/user/{id}":
     get:
       tags:
         - user
-      summary: Get user information.
+      summary: Get a user.
       description: |
-        Get user information.
+        This endpoints will get user's information specified by 'id'.
       deprecated: false
       parameters:
         - name: id
@@ -73,7 +73,7 @@ paths:
     patch:
       tags:
         - user
-      summary: Change user information.
+      summary: Modify a user.
       description: |
         Change user information.
       deprecated: false
@@ -136,7 +136,7 @@ paths:
       tags:
         - user
       summary: Get users list.
-      Description: |
+      description: |
         Get users list
       deprecated: false
       responses:
@@ -462,7 +462,7 @@ components:
                 example: "Bad request"
               data:
                 type: object
-                exapmle: null
+                example: null
     401Error:
       description: |
         Unauthorized
@@ -483,7 +483,7 @@ components:
                 example: "Unauthorized"
               data:
                 type: object
-                exapmle: null
+                example: null
     403Error:
       description: |
         Forbidden
@@ -504,7 +504,7 @@ components:
                 example: "Forbidden"
               data:
                 type: object
-                exapmle: null
+                example: null
     500Error:
       description: |
         Internal server error

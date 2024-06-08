@@ -27,7 +27,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<String> mainMenu = ['貸出','返却','検索','履歴'];
+
+  List<MenuItem> MainMenu = [
+    MenuItem("貸出", Icons.import_contacts, Colors.blue),
+    MenuItem("返却", Icons.import_contacts, Colors.red),
+    MenuItem("検索", Icons.import_contacts, Colors.green),
+    MenuItem("履歴", Icons.import_contacts, Colors.yellow),
+    ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,13 +55,13 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.all(8.0),
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: Colors.green,
+              color: MainMenu[index].color
             ),
             child: GridTile(
-              child: Icon(Icons.book),
+              child: Icon(MainMenu[index].icon),
               footer: Center(
                 child: Text(
-                  '${mainMenu[index]}',
+                  MainMenu[index].name
                 ),
               )
             ),
@@ -66,4 +73,12 @@ class _MyHomePageState extends State<MyHomePage> {
       drawer: const Drawer(child: Center(child: Text("Drawer"))),
     );
   }
+}
+
+class MenuItem {
+  String name;
+  IconData icon;
+  MaterialColor color;
+
+  MenuItem(this.name, this.icon, this.color);
 }

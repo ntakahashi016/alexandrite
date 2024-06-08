@@ -44,7 +44,7 @@ class _MainScreenAppState extends State<MainScreenApp> {
         children: List.generate(4, (index) {
           return ButtonTheme(
             child: MaterialButton(
-              onPressed: () => {print("${mainMenu[index].name} is Pressed!")},
+              onPressed: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => mainMenu[index].route))},
               color: mainMenu[index].color,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,

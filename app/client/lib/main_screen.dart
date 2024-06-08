@@ -48,12 +48,11 @@ class _MainScreenAppState extends State<MainScreenApp> {
               color: mainMenu[index].color
             ),
             child: GridTile(
-              child: Icon(mainMenu[index].icon),
-              footer: Center(
-                child: Text(
-                  mainMenu[index].name
-                ),
-              )
+              child: Row(
+                children: [
+                Icon(mainMenu[index].icon),
+                Text(mainMenu[index].name),
+              ]),
             ),
           );
         }),

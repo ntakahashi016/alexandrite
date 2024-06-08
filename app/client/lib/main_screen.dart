@@ -28,6 +28,7 @@ class _MainScreenAppState extends State<MainScreenApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const Drawer(child: Center(child: Text("Drawer"))),
       appBar: AppBar(
         title: Row(children: const [
           Icon(Icons.import_contacts),
@@ -38,7 +39,7 @@ class _MainScreenAppState extends State<MainScreenApp> {
         crossAxisCount: 2,
         crossAxisSpacing: 10.0,
         mainAxisSpacing: 10.0,
-        childAspectRatio: 1.5,
+        childAspectRatio: 1.77,
         shrinkWrap: true,
         children: List.generate(4, (index) {
           return ButtonTheme(
@@ -56,9 +57,6 @@ class _MainScreenAppState extends State<MainScreenApp> {
           );
         }),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => {print("押したね？")}, child: const Icon(Icons.timer)),
-      drawer: const Drawer(child: Center(child: Text("Drawer"))),
     );
   }
 }

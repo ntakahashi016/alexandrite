@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './menu_item.dart';
+import './main_menu.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -24,14 +24,7 @@ class MainScreenApp extends StatefulWidget {
 }
 
 class _MainScreenAppState extends State<MainScreenApp> {
-
-  List<MenuItem> MainMenu = [
-    MenuItem("貸出", Icons.import_contacts, Colors.blue),
-    MenuItem("返却", Icons.import_contacts, Colors.red),
-    MenuItem("検索", Icons.import_contacts, Colors.green),
-    MenuItem("履歴", Icons.import_contacts, Colors.yellow),
-    ];
-
+  var mainMenu = MainMenu.getMainMenu();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,13 +45,13 @@ class _MainScreenAppState extends State<MainScreenApp> {
             padding: const EdgeInsets.all(8.0),
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: MainMenu[index].color
+              color: mainMenu[index].color
             ),
             child: GridTile(
-              child: Icon(MainMenu[index].icon),
+              child: Icon(mainMenu[index].icon),
               footer: Center(
                 child: Text(
-                  MainMenu[index].name
+                  mainMenu[index].name
                 ),
               )
             ),

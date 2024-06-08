@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MenuItem {
-  String name;
-  IconData icon;
-  MaterialColor color;
+  final String name;
+  final IconData icon;
+  final MaterialColor color;
 
-  MenuItem(this.name, this.icon, this.color);
+  const MenuItem(this.name, this.icon, this.color);
 }

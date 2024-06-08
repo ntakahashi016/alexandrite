@@ -41,18 +41,17 @@ class _MainScreenAppState extends State<MainScreenApp> {
         childAspectRatio: 1.5,
         shrinkWrap: true,
         children: List.generate(4, (index) {
-          return Container(
-            padding: const EdgeInsets.all(8.0),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: mainMenu[index].color
-            ),
-            child: GridTile(
+          return ButtonTheme(
+            child: MaterialButton(
+              onPressed: () => {print("${mainMenu[index].name} is Pressed!")},
+              color: mainMenu[index].color,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                Icon(mainMenu[index].icon),
-                Text(mainMenu[index].name),
-              ]),
+                  Icon(mainMenu[index].icon, size: 28.0),
+                  Text(mainMenu[index].name, style: TextStyle( fontSize: 28.0)),
+                ],
+              ),
             ),
           );
         }),

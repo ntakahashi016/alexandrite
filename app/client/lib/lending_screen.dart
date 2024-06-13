@@ -27,12 +27,12 @@ class LendingScreenApp extends StatefulWidget {
 class _LendingScreenAppState extends State<LendingScreenApp> {
   String id = "";
   final TextEditingController controller = TextEditingController();
-  List<Widget> lrWidgets = [];
-  var lr = LendingResource();
+  List<Widget> lendingList = [];
+  var lendingResource = LendingResource();
 
   void refresh() {
     setState(() {
-      lrWidgets = lr.getResources();
+      lendingList = lendingResource.asListOfWidget();
     });
   }
 
@@ -74,7 +74,7 @@ class _LendingScreenAppState extends State<LendingScreenApp> {
                   child: Icon(Icons.add),
                   onPressed: () {
                     print("add!");
-                    lr.addResource(id);
+                    lendingResource.add(id);
                     controller.clear();
                   },
                 ),
@@ -82,7 +82,7 @@ class _LendingScreenAppState extends State<LendingScreenApp> {
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: lrWidgets,
+              children: lendingList,
             ),
             MaterialButton(
               child: Text("借りる"),

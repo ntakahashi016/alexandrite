@@ -26,7 +26,7 @@ class LendingResource {
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(e.key.toString()),
+          Text((e.key+1).toString()),
           Text(e.value),
           MaterialButton(
             child: Text("-"),

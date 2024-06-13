@@ -75,6 +75,7 @@ class _LendingScreenAppState extends State<LendingScreenApp> {
                   onPressed: () {
                     print("add!");
                     lendingResource.add(id);
+                    id = "";
                     controller.clear();
                   },
                 ),

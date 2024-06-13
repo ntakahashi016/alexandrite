@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './main_screen.dart';
+import './lending_resource.dart';
 
 class LendingScreen extends StatelessWidget {
   const LendingScreen({super.key});
@@ -24,6 +25,23 @@ class LendingScreenApp extends StatefulWidget {
 }
 
 class _LendingScreenAppState extends State<LendingScreenApp> {
+  String id = "";
+  final TextEditingController controller = TextEditingController();
+  List<Widget> lrWidgets = [];
+  var lr = LendingResource();
+
+  void refresh() {
+    setState(() {
+      lrWidgets = lr.getResources();
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    LendingResource.setCallbackFunction(refresh);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,12 +52,49 @@ class _LendingScreenAppState extends State<LendingScreenApp> {
           Text("おうち図書館システム"),
         ]),
       ),
-      body: Center(
-        child: MaterialButton(
-          child: Text("戻る"),
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => MainScreen()));
-          },
+      body: Container(
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 250,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                    ),
+                    onChanged: (value) {
+                      id = value;
+                    },
+                    controller: controller,
+                  ),
+                ),
+                MaterialButton(
+                  child: Icon(Icons.add),
+                  onPressed: () {
+                    print("add!");
+                    lr.addResource(id);
+                    controller.clear();
+                  },
+                ),
+              ]
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: lrWidgets,
+            ),
+            MaterialButton(
+              child: Text("借りる"),
+              onPressed: () {print("lend!");},
+            ),
+            MaterialButton(
+              child: Text("戻る"),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => MainScreen()));
+              },
+            ),
+          ]
         )
       ),
     );

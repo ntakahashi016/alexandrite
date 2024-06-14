@@ -9,6 +9,7 @@ Client application is implemented by Flutter.
 See also [app/client/README.md](./app/client/README.md).
 
 ### Backend
+API documentations are [here](https://ntakahashi016.github.io/alexandrite/).
 ...
 
 ## Installation

@@ -3,7 +3,11 @@ name: Deploy documents to Pages
 on:
   push:
     branches: ["main"]
+    paths: ["documents/**"]
   workflow_dispatch:
+
+env:
+  SPARSE_CHECKOUT_DIR: documents
 
 permissions:
   id-token: write

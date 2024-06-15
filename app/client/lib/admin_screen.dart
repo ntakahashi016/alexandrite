@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './main_appbar.dart';
+import './admin_appbar.dart';
 import './main_drawer.dart';
 import './menu_item.dart';
 import './wip_screen.dart';
@@ -36,7 +36,7 @@ class _AdminScreenAppState extends State<AdminScreenApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: MainDrawer(context),
-      appBar: MainAppBar(),
+      appBar: AdminAppBar(context),
       body: GridView.count(
         crossAxisCount: 2,
         crossAxisSpacing: 10.0,

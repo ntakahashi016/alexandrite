@@ -45,7 +45,7 @@ class _ReturningScreenAppState extends State<ReturningScreenApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const Drawer(child: Center(child: Text("Drawer"))),
+      drawer: MainDrawer(context),
       appBar: MainAppBar(),
       body: Container(
         child: Center(

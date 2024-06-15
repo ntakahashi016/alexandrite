@@ -46,7 +46,7 @@ class _LendingScreenAppState extends State<LendingScreenApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const Drawer(child: Center(child: Text("Drawer"))),
+      drawer: MainDrawer(context),
       appBar: MainAppBar(),
       body: Container(
         child: Column(

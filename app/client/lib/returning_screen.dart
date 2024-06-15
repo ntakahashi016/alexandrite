@@ -52,26 +52,28 @@ class _ReturningScreenAppState extends State<ReturningScreenApp> {
         ]),
       ),
       body: Container(
-        child: Column(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: returningList,
-            ),
-            MaterialButton(
-              child: Text("返す"),
-              onPressed: () {
-                print("return!");
-                returningResource.returnSelectedResources();
-              }
-            ),
-            MaterialButton(
-              child: Text("戻る"),
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => MainScreen()));
-              },
-            ),
-          ]
+        child: Center(
+          child: Column(
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: returningList,
+              ),
+              MaterialButton(
+                child: Text("返す"),
+                onPressed: () {
+                  print("return!");
+                  returningResource.returnSelectedResources();
+                }
+              ),
+              MaterialButton(
+                child: Text("戻る"),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => MainScreen()));
+                },
+              ),
+            ]
+          ),
         )
       ),
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import './admin_appbar.dart';
-import './main_drawer.dart';
+import './admin_drawer.dart';
 import './menu_item.dart';
 import './wip_screen.dart';
 
@@ -35,7 +35,7 @@ class _AdminScreenAppState extends State<AdminScreenApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MainDrawer(context),
+      drawer: AdminDrawer(context),
       appBar: AdminAppBar(context),
       body: GridView.count(
         crossAxisCount: 2,

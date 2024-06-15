@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './main_screen.dart';
 import './main_appbar.dart';
+import './main_drawer.dart';
 import './returning_resource.dart';
 
 class ReturningScreen extends StatelessWidget {
@@ -45,7 +46,7 @@ class _ReturningScreenAppState extends State<ReturningScreenApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const Drawer(child: Center(child: Text("Drawer"))),
+      drawer: MainDrawer(context),
       appBar: MainAppBar(),
       body: Container(
         child: Center(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './main_drawer.dart';
 
 class WipScreen extends StatelessWidget {
   const WipScreen({super.key});
@@ -26,7 +27,7 @@ class _WipScreenAppState extends State<WipScreenApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const Drawer(child: Center(child: Text("Drawer"))),
+      drawer: MainDrawer(context),
       appBar: AppBar(
         title: Row(children: const [
           Icon(Icons.import_contacts),

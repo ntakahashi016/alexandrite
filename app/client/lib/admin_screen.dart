@@ -3,6 +3,7 @@ import './admin_appbar.dart';
 import './admin_drawer.dart';
 import './menu_item.dart';
 import './resource_registration_screen.dart';
+import './user_registration_screen.dart';
 import './wip_screen.dart';
 
 class AdminScreen extends StatelessWidget {
@@ -29,7 +30,7 @@ class AdminScreenApp extends StatefulWidget {
 
 class _AdminScreenAppState extends State<AdminScreenApp> {
   static const _items = [
-      const MenuItem("ユーザー登録", Icons.person_add , Colors.blue,   WipScreen()),
+      const MenuItem("ユーザー登録", Icons.person_add , Colors.blue,   UserRegistrationScreen()),
       const MenuItem("リソース登録", Icons.add_box,     Colors.red,    ResourceRegistrationScreen()),
   ];
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './main_screen.dart';
+import './main_appbar.dart';
 import './returning_resource.dart';
 
 class ReturningScreen extends StatelessWidget {
@@ -45,12 +46,7 @@ class _ReturningScreenAppState extends State<ReturningScreenApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const Drawer(child: Center(child: Text("Drawer"))),
-      appBar: AppBar(
-        title: Row(children: const [
-          Icon(Icons.import_contacts),
-          Text("おうち図書館システム"),
-        ]),
-      ),
+      appBar: MainAppBar(),
       body: Container(
         child: Center(
           child: Column(

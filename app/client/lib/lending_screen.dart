@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './main_screen.dart';
+import './main_appbar.dart';
 import './lending_resource.dart';
 
 class LendingScreen extends StatelessWidget {
@@ -46,12 +47,7 @@ class _LendingScreenAppState extends State<LendingScreenApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const Drawer(child: Center(child: Text("Drawer"))),
-      appBar: AppBar(
-        title: Row(children: const [
-          Icon(Icons.import_contacts),
-          Text("おうち図書館システム"),
-        ]),
-      ),
+      appBar: MainAppBar(),
       body: Container(
         child: Column(
           children: [

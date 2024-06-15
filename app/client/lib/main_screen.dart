@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './main_menu.dart';
+import './main_appbar.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -29,12 +30,7 @@ class _MainScreenAppState extends State<MainScreenApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const Drawer(child: Center(child: Text("Drawer"))),
-      appBar: AppBar(
-        title: Row(children: const [
-          Icon(Icons.import_contacts),
-          Text("おうち図書館システム"),
-        ]),
-      ),
+      appBar: MainAppBar(),
       body: GridView.count(
         crossAxisCount: 2,
         crossAxisSpacing: 10.0,

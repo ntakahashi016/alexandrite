@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './main_appbar.dart';
 import './main_drawer.dart';
 
 class WipScreen extends StatelessWidget {
@@ -28,12 +29,7 @@ class _WipScreenAppState extends State<WipScreenApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: MainDrawer(context),
-      appBar: AppBar(
-        title: Row(children: const [
-          Icon(Icons.import_contacts),
-          Text("おうち図書館システム"),
-        ]),
-      ),
+      appBar: MainAppBar(),
       body: Center(
         child: MaterialButton(
           child: Text("前の画面に戻る"),

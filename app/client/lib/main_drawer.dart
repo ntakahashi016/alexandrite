@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import './menu_item.dart';
-import './main_drawer_item.dart';
 import './wip_screen.dart';
 
 class MainDrawer extends Drawer {

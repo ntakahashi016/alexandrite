@@ -29,7 +29,7 @@ class _WipScreenAppState extends State<WipScreenApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: MainDrawer(context),
-      appBar: MainAppBar(),
+      appBar: MainAppBar(context),
       body: Center(
         child: MaterialButton(
           child: Text("前の画面に戻る"),

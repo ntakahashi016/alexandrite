@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import './main_menu.dart';
 import './main_appbar.dart';
 import './main_drawer.dart';
+import './menu_item.dart';
+import './lending_screen.dart';
+import './returning_screen.dart';
+import './wip_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -26,7 +29,13 @@ class MainScreenApp extends StatefulWidget {
 }
 
 class _MainScreenAppState extends State<MainScreenApp> {
-  var mainMenu = MainMenu.getMainMenu();
+  static const _items = [
+      const MenuItem("貸出", Icons.download , Colors.blue,   LendingScreen()),
+      const MenuItem("返却", Icons.unarchive, Colors.red,    ReturningScreen()),
+      const MenuItem("検索", Icons.search   , Colors.green , WipScreen()),
+      const MenuItem("履歴", Icons.history  , Colors.yellow, WipScreen()),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,16 +47,16 @@ class _MainScreenAppState extends State<MainScreenApp> {
         mainAxisSpacing: 10.0,
         childAspectRatio: 1.77,
         shrinkWrap: true,
-        children: List.generate(4, (index) {
+        children: List.generate(_items.length, (index) {
           return ButtonTheme(
             child: MaterialButton(
-              onPressed: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => mainMenu[index].route))},
-              color: mainMenu[index].color,
+              onPressed: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => _items[index].route))},
+              color: _items[index].color,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(mainMenu[index].icon, size: 28.0),
-                  Text(mainMenu[index].name, style: TextStyle( fontSize: 28.0)),
+                  Icon(_items[index].icon, size: 28.0),
+                  Text(_items[index].name, style: TextStyle( fontSize: 28.0)),
                 ],
               ),
             ),

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import './menu_item.dart';
+import './admin_screen.dart';
 import './wip_screen.dart';
 
 class MainDrawer extends Drawer {
   static const _items = [
-      const MenuItem("管理画面", Icons.settings_applications , Colors.blue,   WipScreen()),
+      const MenuItem("管理画面", Icons.settings_applications , Colors.blue,   AdminScreen()),
   ];
 
   MainDrawer(BuildContext context) : super(

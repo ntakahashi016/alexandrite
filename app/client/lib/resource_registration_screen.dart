@@ -1,0 +1,110 @@
+import 'package:flutter/material.dart';
+import './admin_screen.dart';
+import './admin_appbar.dart';
+import './admin_drawer.dart';
+import './resource_registration_resource.dart';
+
+class ResourceRegistrationScreen extends StatelessWidget {
+  const ResourceRegistrationScreen({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: const ResourceRegistrationScreenApp(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+
+class ResourceRegistrationScreenApp extends StatefulWidget {
+  const ResourceRegistrationScreenApp({super.key, required this.title});
+  final String title;
+  @override
+  State<ResourceRegistrationScreenApp> createState() => _ResourceRegistrationScreenAppState();
+}
+
+class _ResourceRegistrationScreenAppState extends State<ResourceRegistrationScreenApp> {
+  String id = "";
+  final TextEditingController controller = TextEditingController();
+  List<Widget> widgets = [];
+  var resource = ResourceRegistrationResource();
+
+  void refresh() {
+    setState(() {
+      widgets = resource.asListOfWidget();
+    });
+  }
+
+  void flush() {
+    setState(() {
+      widgets = [];
+      resource = ResourceRegistrationResource();
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    ResourceRegistrationResource.setCallbackFunction(refresh);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      drawer: AdminDrawer(context),
+      appBar: AdminAppBar(context),
+      body: Container(
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 250,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                    ),
+                    onChanged: (value) {
+                      id = value;
+                    },
+                    controller: controller,
+                  ),
+                ),
+                MaterialButton(
+                  child: Icon(Icons.add),
+                  onPressed: () {
+                    print("add!");
+                    resource.add(id);
+                    id = "";
+                    controller.clear();
+                  },
+                ),
+              ]
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: widgets,
+            ),
+            MaterialButton(
+              child: Text("登録"),
+              onPressed: () {
+                print("register!");
+                flush();
+              },
+            ),
+            MaterialButton(
+              child: Text("戻る"),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AdminScreen()));
+              },
+            ),
+          ]
+        )
+      ),
+    );
+  }
+}

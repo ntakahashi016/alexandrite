@@ -3,10 +3,12 @@ These images are available under the MTI License.
 
 ## Images
 The current Alexandrite logo is this:
-![alexandrite_logo](alexandrite_logo.png)
+
+<img width=256 alt=alexandrite_logo src=alexandrite_logo.png>
 
 Also logotype is this:
-![alexandrite_logotype](alexandrite_logotype.png)
+
+<img width=256 alt=alexandrite_logotype src=alexandrite_logotype.png>
 
 These PNG files are scaled to a height of 512px.
 

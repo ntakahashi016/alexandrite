@@ -3,7 +3,7 @@ name: Deploy documents to Pages
 on:
   push:
     branches: ["main"]
-    paths: ["documents/**"]
+    paths: ["documents/api/**", "documents/swagger/**"]
   workflow_dispatch:
 
 env:

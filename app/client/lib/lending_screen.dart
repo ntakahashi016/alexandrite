@@ -96,7 +96,7 @@ class _LendingScreenAppState extends State<LendingScreenApp> {
             MaterialButton(
               child: Text("戻る"),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => MainScreen()));
+                Navigator.pop(context);
               },
             ),
           ]

@@ -25,19 +25,29 @@ class ReturningResource {
 
   List<Widget> asListOfWidget() {
     return ids.asMap().entries.map((e) =>
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text((e.key+1).toString()),
-          Text(e.value),
-          new Checkbox(
-            value: flags[e.key],
-            onChanged:  (bool? f) {
-              flags[e.key] = f!;
-              _callback?.call();
-            },
-          ),
-        ]
+      Card(
+        child: Column(
+          children: [
+            ListTile(
+              leading: new Checkbox(
+                value: flags[e.key],
+                onChanged:  (bool? f) {
+                  flags[e.key] = f!;
+                  _callback?.call();
+                },
+              ),
+              title: Text((e.key+1).toString()),
+              subtitle: Text(e.value),
+            ),
+          ]
+        ),
+        color: Colors.white,
+        margin: const EdgeInsets.all(10),
+        elevation:8,
+        shadowColor: Colors.black,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
       )
     ).toList();
   }

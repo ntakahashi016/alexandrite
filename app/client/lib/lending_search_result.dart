@@ -20,19 +20,27 @@ class LendingSearchResult{
       list.add(
         StatefulBuilder(
           builder: (context, setState2) {
-            return Container(
-              width: 250,
-              color: Colors.white,
-              child: Row(
+            return Card(
+              child: Column(
                 children: [
-                  new Checkbox(
-                    value: flags[i],
-                    onChanged: (bool? b) {
-                      setState2(() {flags[i] = b!;});
-                    },
+                  ListTile(
+                    leading: new Checkbox(
+                      value: flags[i],
+                      onChanged: (bool? b) {
+                        setState2(() {flags[i] = b!;});
+                      },
+                    ),
+                    title: Text(i.toString()),
+                    subtitle: Text(ids[i]),
                   ),
-                  Text(ids[i]),
-                ]
+                ],
+              ),
+              color: Colors.white,
+              margin: const EdgeInsets.all(10),
+              elevation:8,
+              shadowColor: Colors.black,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
               ),
             );
           },
@@ -52,9 +60,8 @@ class LendingSearchResult{
             children: [
               Text('検索結果'),
               SizedBox(
-                height: 250,
+                height: 500,
                 child: ListView(
-                  scrollDirection: Axis.horizontal,
                   children: asListOfWidget(context),
                 ),
               ),

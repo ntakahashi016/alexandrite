@@ -8,14 +8,7 @@ class UserRegistrationScreen extends StatelessWidget {
   const UserRegistrationScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const UserRegistrationScreenApp(title: 'Flutter Demo Home Page'),
-    );
+    return UserRegistrationScreenApp(title: 'Flutter Demo Home Page');
   }
 }
 
@@ -99,7 +92,7 @@ class _UserRegistrationScreenAppState extends State<UserRegistrationScreenApp> {
             MaterialButton(
               child: Text("戻る"),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => AdminScreen()));
+                Navigator.pop(context);
               },
             ),
           ]

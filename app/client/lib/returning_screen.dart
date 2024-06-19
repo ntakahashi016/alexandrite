@@ -8,14 +8,7 @@ class ReturningScreen extends StatelessWidget {
   const ReturningScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const ReturningScreenApp(title: 'Flutter Demo Home Page'),
-    );
+    return ReturningScreenApp(title: 'Flutter Demo Home Page');
   }
 }
 
@@ -66,7 +59,7 @@ class _ReturningScreenAppState extends State<ReturningScreenApp> {
               MaterialButton(
                 child: Text("戻る"),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => MainScreen()));
+                  Navigator.pop(context);
                 },
               ),
             ]

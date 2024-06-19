@@ -8,14 +8,7 @@ class ResourceRegistrationScreen extends StatelessWidget {
   const ResourceRegistrationScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const ResourceRegistrationScreenApp(title: 'Flutter Demo Home Page'),
-    );
+    return ResourceRegistrationScreenApp(title: 'Flutter Demo Home Page');
   }
 }
 
@@ -99,7 +92,7 @@ class _ResourceRegistrationScreenAppState extends State<ResourceRegistrationScre
             MaterialButton(
               child: Text("戻る"),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => AdminScreen()));
+                Navigator.pop(context);
               },
             ),
           ]

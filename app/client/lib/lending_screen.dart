@@ -21,7 +21,6 @@ class LendingScreenApp extends StatefulWidget {
 }
 
 class _LendingScreenAppState extends State<LendingScreenApp> {
-  String id = "";
   final TextEditingController controller = TextEditingController();
   List<Widget> lendingList = [];
   var lendingSearchResult = LendingSearchResult();
@@ -57,7 +56,11 @@ class _LendingScreenAppState extends State<LendingScreenApp> {
                       border: OutlineInputBorder(),
                     ),
                     onChanged: (value) {
-                      id = value;
+                    },
+                    onSubmitted: (value) async {
+                      print("submitted!");
+                      var result = await callLendingAPI(value);
+                      if (result) { controller.clear(); };
                     },
                     controller: controller,
                   ),
@@ -66,21 +69,8 @@ class _LendingScreenAppState extends State<LendingScreenApp> {
                   child: Icon(Icons.add),
                   onPressed: () async {
                     print("add!");
-                    var response = ['XXX','YYY','ZZZ'];
-                    response.forEach((r) => lendingSearchResult.add(r));
-                    await lendingSearchResult.show(context);
-                    var r = false;
-                    lendingSearchResult.flags.forEach((f) => r|=f!);
-                    if (r) {
-                      for (int i=0; i<lendingSearchResult.flags.length; i++) {
-                        if (lendingSearchResult.flags[i]==true) {
-                          lendingResource.add(lendingSearchResult.ids[i]);
-                        };
-                      };
-                      id = "";
-                      controller.clear();
-                    };
-                    lendingSearchResult.flush();
+                    var result = await callLendingAPI(controller.text);
+                    if (result) { controller.clear(); };
                   },
                 ),
               ]
@@ -103,5 +93,25 @@ class _LendingScreenAppState extends State<LendingScreenApp> {
         )
       ),
     );
+  }
+
+  Future<bool> callLendingAPI(String value) async {
+    // call api with value
+    var response = ['XXX','YYY','ZZZ'];
+    var result = false;
+    response.forEach((r) => lendingSearchResult.add(r));
+    await lendingSearchResult.show(context);
+    var r = false;
+    lendingSearchResult.flags.forEach((f) => r|=f!);
+    if (r) {
+      for (int i=0; i<lendingSearchResult.flags.length; i++) {
+        if (lendingSearchResult.flags[i]==true) {
+          lendingResource.add(lendingSearchResult.ids[i]);
+        };
+      };
+      result = true;
+    };
+    lendingSearchResult.flush();
+    return result;
   }
 }

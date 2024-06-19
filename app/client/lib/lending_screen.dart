@@ -3,19 +3,13 @@ import './main_screen.dart';
 import './main_appbar.dart';
 import './main_drawer.dart';
 import './lending_resource.dart';
+import './lending_search_result.dart';
 
 class LendingScreen extends StatelessWidget {
   const LendingScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const LendingScreenApp(title: 'Flutter Demo Home Page'),
-    );
+    return LendingScreenApp(title: 'Flutter Demo Home Page');
   }
 }
 
@@ -30,6 +24,7 @@ class _LendingScreenAppState extends State<LendingScreenApp> {
   String id = "";
   final TextEditingController controller = TextEditingController();
   List<Widget> lendingList = [];
+  var lendingSearchResult = LendingSearchResult();
   var lendingResource = LendingResource();
 
   void refresh() {
@@ -69,11 +64,23 @@ class _LendingScreenAppState extends State<LendingScreenApp> {
                 ),
                 MaterialButton(
                   child: Icon(Icons.add),
-                  onPressed: () {
+                  onPressed: () async {
                     print("add!");
-                    lendingResource.add(id);
-                    id = "";
-                    controller.clear();
+                    var response = ['XXX','YYY','ZZZ'];
+                    response.forEach((r) => lendingSearchResult.add(r));
+                    await lendingSearchResult.show(context);
+                    var r = false;
+                    lendingSearchResult.flags.forEach((f) => r|=f!);
+                    if (r) {
+                      for (int i=0; i<lendingSearchResult.flags.length; i++) {
+                        if (lendingSearchResult.flags[i]==true) {
+                          lendingResource.add(lendingSearchResult.ids[i]);
+                        };
+                      };
+                      id = "";
+                      controller.clear();
+                    };
+                    lendingSearchResult.flush();
                   },
                 ),
               ]

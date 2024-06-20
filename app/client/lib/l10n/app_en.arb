@@ -1,0 +1,12 @@
+{
+  "main_title": "Alexandrite",
+  "admin_title": "Alexandrite[ADMIN]",
+  "main_screen": "Main Menu",
+  "admin_screen": "Admin Menu",
+  "lend": "Lend",
+  "returning": "Return",
+  "search": "Search",
+  "history": "History",
+  "back": "Back",
+  "register": "Register"
+}

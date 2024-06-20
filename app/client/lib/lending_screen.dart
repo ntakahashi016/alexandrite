@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import './main_screen.dart';
 import './main_appbar.dart';
 import './main_drawer.dart';
@@ -80,11 +82,11 @@ class _LendingScreenAppState extends State<LendingScreenApp> {
               children: lendingList,
             ),
             MaterialButton(
-              child: Text("借りる"),
+              child: Text(AppLocalizations.of(context)!.lend),
               onPressed: () {print("lend!");},
             ),
             MaterialButton(
-              child: Text("戻る"),
+              child: Text(AppLocalizations.of(context)!.back),
               onPressed: () {
                 Navigator.pop(context);
               },

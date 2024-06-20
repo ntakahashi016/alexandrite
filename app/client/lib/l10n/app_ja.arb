@@ -1,0 +1,12 @@
+{
+  "main_title": "アレキサンドライト",
+  "admin_title": "アレキサンドライト（管理画面）",
+  "main_screen": "利用者画面",
+  "admin_screen": "管理画面",
+  "lend": "貸出",
+  "returning": "返却",
+  "search": "検索",
+  "history": "履歴",
+  "back": "戻る",
+  "register": "登録"
+}

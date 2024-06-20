@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import './admin_screen.dart';
 import './admin_appbar.dart';
 import './admin_drawer.dart';
@@ -83,14 +85,14 @@ class _ResourceRegistrationScreenAppState extends State<ResourceRegistrationScre
               children: widgets,
             ),
             MaterialButton(
-              child: Text("登録"),
+              child: Text(AppLocalizations.of(context)!.register),
               onPressed: () {
                 print("register!");
                 flush();
               },
             ),
             MaterialButton(
-              child: Text("戻る"),
+              child: Text(AppLocalizations.of(context)!.back),
               onPressed: () {
                 Navigator.pop(context);
               },

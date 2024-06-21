@@ -7,46 +7,24 @@ import './menu_item.dart';
 import './lending_screen.dart';
 import './returning_screen.dart';
 import './wip_screen.dart';
+import './language_dropdown_button.dart';
 
 class MainScreen extends StatelessWidget {
-  const MainScreen({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      localizationsDelegates: [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: [
-        Locale('en'), //English
-        Locale('ja'), //Japanese
-        Locale('ar'), //Arabic
-      ],
-      home: const MainScreenApp(title: 'Flutter Demo Home Page'),
-    );
+  MainScreen({
+    super.key,
+    localeSetter,
+  }){
+    LanguageDropdownButton.setLocaleSetter(localeSetter);
+    MainAppBar.setLanguageDropdownButton(LanguageDropdownButton());
   }
-}
 
-class MainScreenApp extends StatefulWidget {
-  const MainScreenApp({super.key, required this.title});
-  final String title;
-  @override
-  State<MainScreenApp> createState() => _MainScreenAppState();
-}
+  var mainAppBar = MainAppBar();
 
-class _MainScreenAppState extends State<MainScreenApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: MainDrawer(context),
-      appBar: MainAppBar(context),
+      appBar: mainAppBar.build(context),
       body: GridView.count(
         crossAxisCount: 2,
         crossAxisSpacing: 10.0,

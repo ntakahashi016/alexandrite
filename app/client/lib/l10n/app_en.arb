@@ -8,5 +8,8 @@
   "search": "Search",
   "history": "History",
   "back": "Back",
-  "register": "Register"
+  "register": "Register",
+  "english": "English",
+  "japanese": "日本語",
+  "arabic": "اللغة العربية"
 }

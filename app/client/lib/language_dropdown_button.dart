@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import './main.dart';
 
 class LanguageDropdownButton {
   static void Function(String)? localeSetter;
@@ -37,6 +38,7 @@ class LanguageDropdownButton {
             setState(() {
               selectedLanguage = value!;
               localeSetter?.call(selectedLanguage!);
+              if (selectedLanguage! == 'ar') { AppBuilder.of(context)!.rebuild(); }
             });
           },
         );

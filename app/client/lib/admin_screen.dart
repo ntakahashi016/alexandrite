@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import './admin_appbar.dart';
 import './admin_drawer.dart';
 import './menu_item.dart';
@@ -7,26 +9,6 @@ import './user_registration_screen.dart';
 import './wip_screen.dart';
 
 class AdminScreen extends StatelessWidget {
-  const AdminScreen({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return AdminScreenApp(title: 'Flutter Demo Home Page');
-  }
-}
-
-class AdminScreenApp extends StatefulWidget {
-  const AdminScreenApp({super.key, required this.title});
-  final String title;
-  @override
-  State<AdminScreenApp> createState() => _AdminScreenAppState();
-}
-
-class _AdminScreenAppState extends State<AdminScreenApp> {
-  static const _items = [
-      const MenuItem("ユーザー登録", Icons.person_add , Colors.blue,   UserRegistrationScreen()),
-      const MenuItem("リソース登録", Icons.add_box,     Colors.red,    ResourceRegistrationScreen()),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,21 +20,34 @@ class _AdminScreenAppState extends State<AdminScreenApp> {
         mainAxisSpacing: 10.0,
         childAspectRatio: 1.77,
         shrinkWrap: true,
-        children: List.generate(_items.length, (index) {
-          return ButtonTheme(
+        children: [
+          ButtonTheme(
             child: MaterialButton(
-              onPressed: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => _items[index].route))},
-              color: _items[index].color,
+              onPressed: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => UserRegistrationScreen()))},
+              color: Colors.blue,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(_items[index].icon, size: 28.0),
-                  Text(_items[index].name, style: TextStyle( fontSize: 28.0)),
+                  Icon(Icons.person_add, size: 28.0),
+                  Text(AppLocalizations.of(context)!.user_registration, style: TextStyle( fontSize: 28.0)),
                 ],
               ),
             ),
-          );
-        }),
+          ),
+          ButtonTheme(
+            child: MaterialButton(
+              onPressed: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => ResourceRegistrationScreen()))},
+              color: Colors.red,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.add_box, size: 28.0),
+                  Text(AppLocalizations.of(context)!.resource_registration, style: TextStyle( fontSize: 28.0)),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

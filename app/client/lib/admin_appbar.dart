@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import './menu_item.dart';
 import './admin_screen.dart';
+import './language_dropdown_button.dart';
 
 class AdminAppBar extends AppBar{
   AdminAppBar(context) : super(
@@ -17,6 +18,7 @@ class AdminAppBar extends AppBar{
           ),
           onPressed: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => AdminScreen()))},
         ),
+        LanguageDropdownButton(),
       ],
     ),
   ) {}

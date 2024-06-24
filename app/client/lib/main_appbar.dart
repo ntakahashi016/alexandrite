@@ -3,9 +3,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import './menu_item.dart';
 import './main_screen.dart';
+import './language_dropdown_button.dart';
 
-class MainAppBar extends AppBar{
-  MainAppBar(context) : super(
+class MainAppBar extends AppBar {
+  MainAppBar(BuildContext context) : super(
     title: Row(
       children: [
         MaterialButton(
@@ -17,6 +18,7 @@ class MainAppBar extends AppBar{
           ),
           onPressed: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => MainScreen()))},
         ),
+        LanguageDropdownButton(),
       ],
     ),
   ) {}

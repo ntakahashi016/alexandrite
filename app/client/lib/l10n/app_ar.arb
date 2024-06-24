@@ -1,0 +1,14 @@
+{
+  "main_title": "الكسندريت",
+  "admin_title": "الكسندريت[المسؤول]",
+  "main_screen": "القائمة الرئيسية",
+  "admin_screen": "قائمة المشرف",
+  "lend": "إقراض",
+  "returning": "عائد",
+  "search": "بحث",
+  "history": "التاريخ",
+  "back": "رجوع",
+  "register": "التسجيل",
+  "user_registration": "تسجيل مستخدم",
+  "resource_registration": "تسجيل الموارد"
+}

@@ -8,5 +8,7 @@
   "search": "検索",
   "history": "履歴",
   "back": "戻る",
-  "register": "登録"
+  "register": "登録",
+  "user_registration": "ユーザー登録",
+  "resource_registration": "リソース登録"
 }

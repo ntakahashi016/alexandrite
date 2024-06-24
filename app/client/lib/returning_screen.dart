@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import './main_screen.dart';
 import './main_appbar.dart';
 import './main_drawer.dart';
@@ -50,14 +52,14 @@ class _ReturningScreenAppState extends State<ReturningScreenApp> {
                 children: returningList,
               ),
               MaterialButton(
-                child: Text("返す"),
+                child: Text(AppLocalizations.of(context)!.lend),
                 onPressed: () {
                   print("return!");
                   returningResource.returnSelectedResources();
                 }
               ),
               MaterialButton(
-                child: Text("戻る"),
+                child: Text(AppLocalizations.of(context)!.back),
                 onPressed: () {
                   Navigator.pop(context);
                 },

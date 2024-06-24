@@ -1,0 +1,17 @@
+{
+  "main_title": "Alexandrite",
+  "admin_title": "Alexandrite[ADMIN]",
+  "main_screen": "Main Menu",
+  "admin_screen": "Admin Menu",
+  "lend": "Lend",
+  "returning": "Return",
+  "search": "Search",
+  "history": "History",
+  "back": "Back",
+  "register": "Register",
+  "english": "English",
+  "japanese": "日本語",
+  "arabic": "اللغة العربية",
+  "user_registration": "Register user",
+  "resource_registration": "Register resource"
+}

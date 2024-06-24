@@ -11,5 +11,7 @@
   "register": "Register",
   "english": "English",
   "japanese": "日本語",
-  "arabic": "اللغة العربية"
+  "arabic": "اللغة العربية",
+  "user_registration": "Register user",
+  "resource_registration": "Register resource"
 }

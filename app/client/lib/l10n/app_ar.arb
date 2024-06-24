@@ -9,7 +9,6 @@
   "history": "التاريخ",
   "back": "رجوع",
   "register": "التسجيل",
-  "english": "English",
-  "japanese": "日本語",
-  "arabic": "اللغة العربية"
+  "user_registration": "تسجيل مستخدم",
+  "resource_registration": "تسجيل الموارد"
 }

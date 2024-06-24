@@ -10,21 +10,11 @@ import './wip_screen.dart';
 import './language_dropdown_button.dart';
 
 class MainScreen extends StatelessWidget {
-  MainScreen({
-    super.key,
-    localeSetter,
-  }){
-    LanguageDropdownButton.setLocaleSetter(localeSetter);
-    MainAppBar.setLanguageDropdownButton(LanguageDropdownButton());
-  }
-
-  var mainAppBar = MainAppBar();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: MainDrawer(context),
-      appBar: mainAppBar.build(context),
+      appBar: MainAppBar(context),
       body: GridView.count(
         crossAxisCount: 2,
         crossAxisSpacing: 10.0,

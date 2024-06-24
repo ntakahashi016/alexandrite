@@ -3,6 +3,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'dart:ui' as ui;
 import './main_screen.dart';
+import './language_dropdown_button.dart';
+import './settings.dart';
 
 void main() {
   runApp(Alexandrite());
@@ -38,14 +40,48 @@ class Alexandrite extends StatefulWidget {
 }
 
 class _AlexandriteState extends State<Alexandrite> {
-  void setLocale(String l) {
-    setState(() {
-      localeString = l;
-    });
-    print(Locale(localeString));
+  static Locale? currentLocale = null;
+  static Locale? configuredLocale = null;
+
+  void setLocale(Locale l, [bool b = false]) {
+    if (isSupportecLocale(l)) {
+      setState(() {
+        currentLocale = l;
+      });
+      if (b) { Settings.setLocale(l); }
+    }
   }
 
-  String localeString = 'en';
+  void setDefaultLocale() async {
+    configuredLocale = await Settings.getLocale();
+    Locale? locale = null;
+    if (isSupportecLocale(configuredLocale)) {
+      var i = AppLocalizations.supportedLocales.indexOf(configuredLocale!);
+      locale = AppLocalizations.supportedLocales[i];
+    } else if (isSupportecLocale(ui.window.locale)) {
+      var i = AppLocalizations.supportedLocales.indexOf(ui.window.locale);
+      locale = AppLocalizations.supportedLocales[i];
+    } else {
+      locale = AppLocalizations.supportedLocales.first;
+    }
+    setLocale(locale);
+  }
+
+  bool isSupportecLocale(Locale? l) {
+    if (l!=null) {
+      for (var sl in AppLocalizations.supportedLocales) {
+        if (l==sl) { return true; }
+      }
+    }
+    return false;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    LanguageDropdownButton.setLocaleSetter(setLocale);
+    setDefaultLocale();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,25 +103,8 @@ class _AlexandriteState extends State<Alexandrite> {
           Locale('ja', ''), //Japanese
           Locale('ar', ''), //Arabic
         ],
-        localeListResolutionCallback: (locales, supportedLocales) {
-          final systemLocale = ui.window.locale;
-          if (locales == null) {
-            return AppLocalizations.supportedLocales.first;
-          }
-          for (var l in supportedLocales) {
-            if (localeString == l.languageCode) {
-              return l;
-            }
-          }
-          for (var l in supportedLocales) {
-            if (systemLocale.languageCode == l.languageCode) {
-              return l;
-            }
-          }
-          return AppLocalizations.supportedLocales.first;
-        },
-        locale: Locale(localeString),
-        home: MainScreen(localeSetter: setLocale),
+        locale: currentLocale,
+        home: MainScreen(),
       );
    });
   }

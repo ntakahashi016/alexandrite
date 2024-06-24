@@ -42,7 +42,7 @@ class _ReturningScreenAppState extends State<ReturningScreenApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: MainDrawer(context),
-      // appBar: MainAppBar(context),
+      appBar: MainAppBar(context),
       body: Container(
         child: Center(
           child: Column(

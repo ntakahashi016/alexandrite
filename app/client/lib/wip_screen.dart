@@ -24,7 +24,7 @@ class _WipScreenAppState extends State<WipScreenApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: MainDrawer(context),
-      // appBar: MainAppBar(context),
+      appBar: MainAppBar(context),
       body: Center(
         child: MaterialButton(
           child: Text(AppLocalizations.of(context)!.back),

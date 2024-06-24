@@ -3,45 +3,51 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import './main.dart';
 
-class LanguageDropdownButton {
-  static void Function(String)? localeSetter;
-  static void setLocaleSetter(void Function(String) func) { localeSetter = func; }
+class LanguageDropdownButton extends StatefulWidget {
+  LanguageDropdownButton({super.key});
+  static void Function(Locale, bool)? localeSetter;
+  static void setLocaleSetter(void Function(Locale, bool) l) {localeSetter = l;}
 
-  String? preferdLanguage = 'ja';
-  String? defaultLanguage = 'en';
-  String? selectedLanguage = null;
+  @override
+  State<LanguageDropdownButton> createState() => _LanguageDropdownButton();
+}
 
-  LanguageDropdownButton() {
-    this.selectedLanguage = this.preferdLanguage==null ? this.defaultLanguage : this.preferdLanguage;
-  }
+class _LanguageDropdownButton extends State<LanguageDropdownButton> {
+  static Locale? currentLocale = null;
+  static String? currentLanguage = null;
+  static Map<String, Locale> codeToLocaleMap = {
+    AppLocalizations.supportedLocales[1].languageCode : AppLocalizations.supportedLocales[1],
+    AppLocalizations.supportedLocales[2].languageCode : AppLocalizations.supportedLocales[2],
+    AppLocalizations.supportedLocales[0].languageCode : AppLocalizations.supportedLocales[0],
+  };
 
+  @override
   Widget build(BuildContext context) {
-    return StatefulBuilder(
-      builder: (context, setState) {
-        return DropdownButton(
-          items: [
-            DropdownMenuItem(
-              value: 'en',
-              child: Text(AppLocalizations.of(context)!.english),
-            ),
-            DropdownMenuItem(
-              value: 'ja',
-              child: Text(AppLocalizations.of(context)!.japanese),
-            ),
-            DropdownMenuItem(
-              value: 'ar',
-              child: Text(AppLocalizations.of(context)!.arabic),
-            ),
-          ],
-          value: selectedLanguage,
-          onChanged: (String? value) {
-            setState(() {
-              selectedLanguage = value!;
-              localeSetter?.call(selectedLanguage!);
-              if (selectedLanguage! == 'ar') { AppBuilder.of(context)!.rebuild(); }
-            });
-          },
-        );
+    Map<Locale, String> localeToLanguageMap = {
+      AppLocalizations.supportedLocales[1] : AppLocalizations.of(context)!.english,
+      AppLocalizations.supportedLocales[2] : AppLocalizations.of(context)!.japanese,
+      AppLocalizations.supportedLocales[0] : AppLocalizations.of(context)!.arabic,
+    };
+    List<DropdownMenuItem> items = List.generate(AppLocalizations.supportedLocales.length, (index) {
+      Locale l = AppLocalizations.supportedLocales[index];
+      return DropdownMenuItem(
+        value: l.languageCode,
+        child: Text(localeToLanguageMap[l]!),
+      );
+    });
+    currentLocale = Localizations.localeOf(context);
+    currentLanguage = currentLocale!.languageCode;
+    return DropdownButton(
+      items: items,
+      value: currentLanguage,
+      onChanged: (dynamic value) {
+        setState(() {
+          currentLanguage = value!;
+          currentLocale = codeToLocaleMap[value!];
+          TextDirection oldDirection = Directionality.of(context);
+          LanguageDropdownButton.localeSetter?.call(currentLocale!, true);
+          if (Directionality.of(context) != oldDirection) { AppBuilder.of(context)!.rebuild(); }
+        });
       },
     );
   }

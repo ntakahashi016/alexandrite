@@ -1,3 +1,8 @@
+/****************************************************************
+ * main_appbar.dart
+ * A part of screens for user.
+ ****************************************************************/
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -5,7 +10,16 @@ import './menu_item.dart';
 import './main_screen.dart';
 import './language_dropdown_button.dart';
 
+/****************
+ * MainAppBar
+ * A customized AppBar for users.
+ ****************/
 class MainAppBar extends AppBar {
+
+  /****
+   * constructor
+   * Returns widget of this class.
+   ****/
   MainAppBar(BuildContext context) : super(
     title: Row(
       children: [

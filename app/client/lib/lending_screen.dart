@@ -8,21 +8,6 @@ import './lending_resource.dart';
 import './lending_search_result.dart';
 
 class LendingScreen extends StatelessWidget {
-  const LendingScreen({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return LendingScreenApp(title: 'Flutter Demo Home Page');
-  }
-}
-
-class LendingScreenApp extends StatefulWidget {
-  const LendingScreenApp({super.key, required this.title});
-  final String title;
-  @override
-  State<LendingScreenApp> createState() => _LendingScreenAppState();
-}
-
-class _LendingScreenAppState extends State<LendingScreenApp> {
   final TextEditingController controller = TextEditingController();
   List<Widget> lendingList = [];
   var lendingSearchResult = LendingSearchResult();

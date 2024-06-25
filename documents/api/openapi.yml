@@ -315,13 +315,13 @@ paths:
               examples:
                 histories:
                   $ref: "#/components/examples/histories"
-  "/book/{id}":
+  "/resource/{id}":
     get:
       tags:
-        - book
-      summary: Get book information.
+        - resource
+      summary: Get resource information.
       description: |
-        Get book information.
+        Get resource information.
       deprecated: false
       parameters:
         - name: id
@@ -335,16 +335,16 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/book"
+                $ref: "#/components/schemas/resource"
               examples:
                 book:
-                  $ref: "#/components/examples/book"
+                  $ref: "#/components/examples/resource"
     delete:
       tags:
-        - book
-      summary: Delete a book.
+        - resource
+      summary: Delete a resource.
       description: |
-        Delete a book.
+        Delete a resource.
       deprecated: false
       parameters:
         - name: id
@@ -365,10 +365,10 @@ paths:
                     example: null
     patch:
       tags:
-        - book
-      summary: Change a book.
+        - resource
+      summary: Modify a resource.
       description: |
-        Change a book.
+        Modify a resource.
       deprecated: false
       parameters:
         - name: id
@@ -381,65 +381,65 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/book"
+              $ref: "#/components/schemas/resource"
             examples:
               book:
-                $ref: "#/components/examples/book"
+                $ref: "#/components/examples/resource"
       responses:
         "200":
           description: "Success"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/book"
+                $ref: "#/components/schemas/resource"
               examples:
                 book:
-                  $ref: "#/components/examples/book"
-  "/books":
+                  $ref: "#/components/examples/resource"
+  "/resources":
     post:
       tags:
-        - book
-      summary: Create a book.
+        - resource
+      summary: Create resources.
       description: |
-        Create a book.
+        Create resources.
       deprecated: false
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/books"
+              $ref: "#/components/schemas/resources"
             examples:
               books:
-                $ref: "#/components/examples/books"
+                $ref: "#/components/examples/resources"
       responses:
         '200':
           description: Book registration succeeded
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/books"
+                $ref: "#/components/schemas/resources"
               examples:
                 books:
-                  $ref: "#/components/examples/books"
+                  $ref: "#/components/examples/resources"
         '500':
           $ref: '#/components/responses/500Error'
     get:
       tags:
-        - book
-      summary: Getting book list is succeeded
+        - resource
+      summary: Getting resource list is succeeded
       description: |
-        Get books list.
+        Get resource list.
       responses:
         "200":
-          description: Getting book list is succeeded
+          description: Getting resource list is succeeded
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/books"
+                $ref: "#/components/schemas/resources"
               examples:
                 books:
-                  $ref: "#/components/examples/books"
+                  $ref: "#/components/examples/resources"
 components:
   responses:
     400Error:
@@ -568,7 +568,7 @@ components:
         userId:
           type: integer
           format: number
-        bookId:
+        resourceId:
           type: integer
           format: number
         lentDate:

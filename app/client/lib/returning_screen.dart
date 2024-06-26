@@ -1,3 +1,8 @@
+/****************************************************************
+ * returning_screen.dart
+ * A screen to lend resource.
+ ****************************************************************/
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -6,6 +11,10 @@ import './main_appbar.dart';
 import './main_drawer.dart';
 import './returning_resource.dart';
 
+/****************
+ * ReturningScreen
+ * Displays a screen to retun resource.
+ ****************/
 class ReturningScreen extends StatelessWidget {
   const ReturningScreen({super.key});
   @override
@@ -25,12 +34,21 @@ class _ReturningScreenAppState extends State<ReturningScreenApp> {
   List<Widget> returningList = [];
   var returningResource = ReturningResource();
 
+  /****
+   * refresh()
+   * A callback function be called when selected resources changed.
+   ****/
   void refresh() {
     setState(() {
       returningList = returningResource.asListOfWidget();
     });
   }
 
+  /****
+   * initState()
+   * Runs initialization process.
+   * This can deal with properties and can call functions like a constructor.
+   ****/
   @override
   void initState() {
     super.initState();
@@ -38,6 +56,10 @@ class _ReturningScreenAppState extends State<ReturningScreenApp> {
     refresh();
   }
 
+  /***
+   * build()
+   * Retruns widget of this class.
+   ***/
   @override
   Widget build(BuildContext context) {
     return Scaffold(

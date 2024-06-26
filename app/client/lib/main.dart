@@ -2,6 +2,7 @@
  * main.dart
  * Specifies the state management and rebuilding of the entire application.
  ****************************************************************/
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -28,7 +29,7 @@ class AppBuilder extends StatefulWidget {
 
   /***
    * createState()
-   * Creates instance of State of this class.
+   * Creates instance of State
    ***/
   @override
   AppBuilderState createState() => new AppBuilderState();

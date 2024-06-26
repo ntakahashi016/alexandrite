@@ -1,3 +1,8 @@
+/****************************************************************
+ * admin_appbar.dart
+ * A part of screens for administrator.
+ ****************************************************************/
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -5,7 +10,16 @@ import './menu_item.dart';
 import './admin_screen.dart';
 import './language_dropdown_button.dart';
 
+/****************
+ * AdminAppBar
+ * A customized AppBar for administrator.
+ ****************/
 class AdminAppBar extends AppBar{
+
+  /****
+   * constructor
+   * Returns AppBar customized for administrator.
+   ****/
   AdminAppBar(context) : super(
     title: Row(
       children: [

@@ -18,7 +18,7 @@ class MainDrawer extends Drawer {
 
   /****
    * constructor
-   * Returns widget of this class.
+   * Returns Drawer customized for users.
    ****/
   MainDrawer(BuildContext context) : super(
     child: Column(

@@ -1,3 +1,8 @@
+/****************************************************************
+ * lending_screen.dart
+ * A screen to lend resource.
+ ****************************************************************/
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -7,24 +12,41 @@ import './main_drawer.dart';
 import './lending_resource.dart';
 import './lending_search_result.dart';
 
+/****************
+ * LendingScreen
+ * Displays a screen to lend resource.
+ ****************/
 class LendingScreen extends StatelessWidget {
   final TextEditingController controller = TextEditingController();
   List<Widget> lendingList = [];
   var lendingSearchResult = LendingSearchResult();
   var lendingResource = LendingResource();
 
+  /****
+   * refresh()
+   * A callback function be called when selected resources changed.
+   ****/
   void refresh() {
     setState(() {
       lendingList = lendingResource.asListOfWidget();
     });
   }
 
+  /****
+   * initState()
+   * Runs initialization process.
+   * This can deal with properties and can call functions like a constructor.
+   ****/
   @override
   void initState() {
     super.initState();
     LendingResource.setCallbackFunction(refresh);
   }
 
+  /***
+   * build()
+   * Retruns widget of this class.
+   ***/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,6 +104,10 @@ class LendingScreen extends StatelessWidget {
     );
   }
 
+  /****
+   * callLendingAPI()
+   * This is a temporaly implementation to call APIs.
+   ****/
   Future<bool> callLendingAPI(String value) async {
     // call api with value
     var response = ['XXX','YYY','ZZZ'];

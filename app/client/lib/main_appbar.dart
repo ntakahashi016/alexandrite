@@ -18,7 +18,7 @@ class MainAppBar extends AppBar {
 
   /****
    * constructor
-   * Returns widget of this class.
+   * Returns AppBar customized for user.
    ****/
   MainAppBar(BuildContext context) : super(
     title: Row(

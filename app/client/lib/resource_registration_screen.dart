@@ -1,3 +1,8 @@
+/****************************************************************
+ * resource_registration_screen.dart
+ * A screen to add resource.
+ ****************************************************************/
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -6,6 +11,10 @@ import './admin_appbar.dart';
 import './admin_drawer.dart';
 import './resource_registration_resource.dart';
 
+/****************
+ * ResourceRegistrationScreen
+ * Displays a screen to add resource.
+ ****************/
 class ResourceRegistrationScreen extends StatelessWidget {
   const ResourceRegistrationScreen({super.key});
   @override
@@ -27,12 +36,21 @@ class _ResourceRegistrationScreenAppState extends State<ResourceRegistrationScre
   List<Widget> widgets = [];
   var resource = ResourceRegistrationResource();
 
+  /****
+   * refresh()
+   * A callback function be called when selected resources changed.
+   ****/
   void refresh() {
     setState(() {
       widgets = resource.asListOfWidget();
     });
   }
 
+  /****
+   * flush()
+   * Delete all information of result.
+   * It is assumed used when canceled selection.
+   ****/
   void flush() {
     setState(() {
       widgets = [];
@@ -40,12 +58,21 @@ class _ResourceRegistrationScreenAppState extends State<ResourceRegistrationScre
     });
   }
 
+  /****
+   * initState()
+   * Runs initialization process.
+   * This can deal with properties and can call functions like a constructor.
+   ****/
   @override
   void initState() {
     super.initState();
     ResourceRegistrationResource.setCallbackFunction(refresh);
   }
 
+  /***
+   * build()
+   * Retruns widget of this class.
+   ***/
   @override
   Widget build(BuildContext context) {
     return Scaffold(

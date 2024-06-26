@@ -1,3 +1,8 @@
+/****************************************************************
+ * admin_screen.dart
+ * Specifies a screen for administrator.
+ ****************************************************************/
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -8,7 +13,16 @@ import './resource_registration_screen.dart';
 import './user_registration_screen.dart';
 import './wip_screen.dart';
 
+/****************
+ * AdminScreen
+ * Displays a screen for administrator.
+ ****************/
 class AdminScreen extends StatelessWidget {
+
+  /****
+   * build()
+   * Retruns widget of this class.
+   ****/
   @override
   Widget build(BuildContext context) {
     return Scaffold(

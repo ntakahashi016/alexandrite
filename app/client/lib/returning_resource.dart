@@ -1,15 +1,32 @@
+/****************************************************************
+ * returning_resource.dart
+ * A structure of resources of selected to return.
+ ****************************************************************/
+
 import 'package:flutter/material.dart';
 import './returning_screen.dart';
 
+/****************
+ * LendingResource
+ * 
+ ****************/
 class ReturningResource {
   List<String> ids = ['a', 'b', 'c'];
   List<bool> flags = [false,false,false];
   static void Function()? _callback;
 
+  /****
+   * setCallbackFunction()
+   * A setter to callback.
+   ****/
   static void setCallbackFunction(void Function() func) {
      _callback = func;
   }
 
+  /****
+   * returnSelectedResources()
+   * 
+   ****/
   void returnSelectedResources() {
     var r = false;
     flags.forEach((f) => r|=f);
@@ -23,6 +40,10 @@ class ReturningResource {
     _callback?.call();
   }
 
+  /****
+   * asListOfWidget()
+   * Returns a list of resources.
+   ****/
   List<Widget> asListOfWidget() {
     return ids.asMap().entries.map((e) =>
       Card(

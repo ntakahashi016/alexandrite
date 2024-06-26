@@ -1,19 +1,42 @@
+/****************************************************************
+ * lending_search_result.dart
+ * A structure of results of calling lending API.
+ ****************************************************************/
+
 import 'package:flutter/material.dart';
 
+/****************
+ * LendingSearchResult
+ * A structure of results of calling lending API.
+ ****************/
 class LendingSearchResult{
   List<String> ids = [];
   List<bool?> flags = [];
 
+  /****
+   * add()
+   * Adds information of result.
+   * Currently, it stores resource_id and selected_flag.
+   ****/
   void add(String id, {bool? flag = false}) {
     ids.add(id);
     flags.add(flag);
   }
 
+  /****
+   * flush()
+   * Delete all information of result.
+   * It is assumed used when canceled selection.
+   ****/
   void flush() {
     ids = [];
     flags = [];
   }
 
+  /****
+   * asListOfWidget()
+   * Returns a list of resources.
+   ****/
   List<Widget> asListOfWidget(BuildContext context) {
     List<Widget> list = [];
     for (int i = 0; i < ids.length; i++) {
@@ -50,6 +73,10 @@ class LendingSearchResult{
     return list;
   }
 
+  /****
+   * show()
+   * This shows API's result as a modal window.
+   ****/
   Future show(BuildContext context) {
     final Widget dialog = Dialog(
         child: Container(

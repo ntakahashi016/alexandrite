@@ -1,6 +1,6 @@
 /****************************************************************
  * language_dropdown_button.dart
- * Be able to selec the locale dynamically.
+ * Be able to select the locale dynamically.
  ****************************************************************/
 
 import 'package:flutter/material.dart';

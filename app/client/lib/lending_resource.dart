@@ -11,6 +11,8 @@ import './selectable_resource_list.dart';
  * 
  ****************/
 class LendingResource extends StatefulWidget {
+  @override
+  State<_LendigResourceState> createState() => _LendingResourceState();
 }
 
 class _LendingResourceState extends State<LendingResource> {
@@ -32,8 +34,10 @@ class _LendingResourceState extends State<LendingResource> {
                 MaterialButton(
                   child: Text("-"),
                   onPressed: () {
-                    print("delete!");
-                    resources.deleteAt(index);
+                    setState(() {
+                      print("delete!");
+                      resources.deleteAt(index);
+                    }
                   },
                 ),
               ],

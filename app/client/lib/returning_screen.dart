@@ -16,21 +16,6 @@ import './returning_resource.dart';
  * Displays a screen to retun resource.
  ****************/
 class ReturningScreen extends StatelessWidget {
-  const ReturningScreen({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return ReturningScreenApp(title: 'Flutter Demo Home Page');
-  }
-}
-
-class ReturningScreenApp extends StatefulWidget {
-  const ReturningScreenApp({super.key, required this.title});
-  final String title;
-  @override
-  State<ReturningScreenApp> createState() => _ReturningScreenAppState();
-}
-
-class _ReturningScreenAppState extends State<ReturningScreenApp> {
   List<Widget> returningList = [];
   var returningResource = ReturningResource();
 

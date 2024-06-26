@@ -16,21 +16,6 @@ import './user_registration_resource.dart';
  * Displays a screen to add user.
  ****************/
 class UserRegistrationScreen extends StatelessWidget {
-  const UserRegistrationScreen({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return UserRegistrationScreenApp(title: 'Flutter Demo Home Page');
-  }
-}
-
-class UserRegistrationScreenApp extends StatefulWidget {
-  const UserRegistrationScreenApp({super.key, required this.title});
-  final String title;
-  @override
-  State<UserRegistrationScreenApp> createState() => _UserRegistrationScreenAppState();
-}
-
-class _UserRegistrationScreenAppState extends State<UserRegistrationScreenApp> {
   String id = "";
   final TextEditingController controller = TextEditingController();
   List<Widget> widgets = [];

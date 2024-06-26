@@ -1,68 +1,47 @@
 /****************************************************************
  * lending_resource.dart
- * A structure of resources of selected to lend.
+ * 
  ****************************************************************/
 
 import 'package:flutter/material.dart';
-import './lending_screen.dart';
+import './selectable_resource_list.dart';
 
 /****************
  * LendingResource
  * 
  ****************/
-class LendingResource {
-  List<String> ids = [];
-  static void Function()? _callback;
+class LendingResource extends StatefulWidget {
+}
 
-  /****
-   * setCallbackFunction()
-   * A setter to callback.
-   ****/
-  static void setCallbackFunction(void Function() func) {
-     _callback = func;
-  }
+class _LendingResourceState extends State<LendingResource> {
+  var resources = SelectableResourceList();
 
-  /****
-   * add()
-   * Adds resource information.
-   ****/
-  void add(String id) {
-    if (id=="") { return; };
-    ids.add(id);
-    _callback?.call();
-  }
-
-  /****
-   * deleteAt()
-   * Delete a resource specified index.
-   ****/
-  void deleteAt(int index) {
-    if (index<0 && index>=ids.length) { return; };
-    ids.removeAt(index);
-    _callback?.call();
-  }
-
-  /****
-   * asListOfWidget()
-   * Returns a list of resources.
-   ****/
-  List<Widget> asListOfWidget() {
-    return ids.asMap().entries.map((e) =>
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text((e.key+1).toString()),
-          Text(e.value),
-          MaterialButton(
-            child: Text("-"),
-            onPressed: () {
-              print("delete!");
-              this.deleteAt(e.key);
-            },
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      padding: const EdgeInsets.all(8),
+      itemCount: resources.length,
+      itemBuilder: (BuildContext context, int index) {
+        return Container(
+          height: 50,
+          child: Center(
+            child: Row(
+              children: [
+                Text(resources.at(index).id.toString()),
+                Text(resources.at(index).name),
+                MaterialButton(
+                  child: Text("-"),
+                  onPressed: () {
+                    print("delete!");
+                    resources.deleteAt(index);
+                  },
+                ),
+              ],
+            ),
           ),
-        ]
-      )
-    ).toList();
+        );
+      },
+    );
   }
 }
 

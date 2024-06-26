@@ -16,21 +16,6 @@ import './resource_registration_resource.dart';
  * Displays a screen to add resource.
  ****************/
 class ResourceRegistrationScreen extends StatelessWidget {
-  const ResourceRegistrationScreen({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return ResourceRegistrationScreenApp(title: 'Flutter Demo Home Page');
-  }
-}
-
-class ResourceRegistrationScreenApp extends StatefulWidget {
-  const ResourceRegistrationScreenApp({super.key, required this.title});
-  final String title;
-  @override
-  State<ResourceRegistrationScreenApp> createState() => _ResourceRegistrationScreenAppState();
-}
-
-class _ResourceRegistrationScreenAppState extends State<ResourceRegistrationScreenApp> {
   String id = "";
   final TextEditingController controller = TextEditingController();
   List<Widget> widgets = [];

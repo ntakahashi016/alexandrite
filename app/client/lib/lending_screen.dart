@@ -22,27 +22,6 @@ class LendingScreen extends StatelessWidget {
   var lendingSearchResult = LendingSearchResult();
   var lendingResource = LendingResource();
 
-  /****
-   * refresh()
-   * A callback function be called when selected resources changed.
-   ****/
-  void refresh() {
-    setState(() {
-      lendingList = lendingResource.asListOfWidget();
-    });
-  }
-
-  /****
-   * initState()
-   * Runs initialization process.
-   * This can deal with properties and can call functions like a constructor.
-   ****/
-  @override
-  void initState() {
-    super.initState();
-    LendingResource.setCallbackFunction(refresh);
-  }
-
   /***
    * build()
    * Retruns widget of this class.

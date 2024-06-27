@@ -21,12 +21,7 @@ import './lending_search_result.dart';
 class LendingScreen extends StatelessWidget {
   final TextEditingController controller = TextEditingController();
   var lendingSearchResult = LendingSearchResult();
-  SelectableResourceList resources = SelectableResourceList();
-  LendingResource lendingResource = LendingResource(resources: SelectableResourceList());
-
-  LendingScreen() : super() {
-    lendingResource = LendingResource(resources: resources);
-  }
+  var lendingResource = LendingResource();
 
   /***
    * build()
@@ -92,19 +87,16 @@ class LendingScreen extends StatelessWidget {
    ****/
   Future<bool> callLendingAPI(BuildContext context, String value) async {
     // call api with value
-    var response = [1,2,3];
+    var response = [Resource(1, "XXX"), Resource(2, "YYY"), Resource(3, "ZZZ")];
     var result = false;
-    response.forEach((r) => lendingSearchResult.add(r));
-    await lendingSearchResult.show(context);
-    var r = false;
-    lendingSearchResult.flags.forEach((f) => r|=f!);
-    if (r) {
-      for (int i=0; i<lendingSearchResult.flags.length; i++) {
-        if (lendingSearchResult.flags[i]==true) {
-          lendingResource.add!(lendingSearchResult.ids[i]);
-        };
-        lendingResource.refresh!();
-      };
+    response.forEach(lendingSearchResult.add);
+    await LendingModal.show!(context, lendingSearchResult);
+    var selected = lendingSearchResult.selectedResources();
+    if (!selected.isEmpty) {
+      selected.forEach ((r) {
+          lendingResource.add(r!);
+      });
+      lendingResource.refresh!();
       result = true;
     };
     lendingSearchResult.flush();

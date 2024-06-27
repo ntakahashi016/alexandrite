@@ -12,24 +12,17 @@ import './selectable_resource_list.dart';
  * 
  ****************/
 class LendingResource extends StatefulWidget {
-  final SelectableResourceList resources;
-  void Function(int)? add;
+  SelectableResourceList resources = SelectableResourceList();
   void Function()? refresh;
-  void setAddFunction(void Function(int) func) { add = func; }
   void setRefreshFunction(void Function() func) { refresh = func; }
-  LendingResource({
-    Key? key,
-    required this.resources,
-  }) : super(key: key);
+  void add(Resource r) {
+    resources.add(r);
+  }
   @override
   _LendingResourceState createState() => new _LendingResourceState();
 }
 
 class _LendingResourceState extends State<LendingResource> {
-
-  void add(int i) {
-    widget.resources.add(Resource(i,'xxx'));
-  }
 
   void refresh() {
     setState(() {});
@@ -37,7 +30,6 @@ class _LendingResourceState extends State<LendingResource> {
 
   @override
   void initState() {
-    widget.setAddFunction(add);
     widget.setRefreshFunction(refresh);
   }
 
@@ -54,8 +46,8 @@ class _LendingResourceState extends State<LendingResource> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(widget.resources.at(index).id.toString()),
-              Text(widget.resources.at(index).name),
+              Text((index+1).toString()),
+              Text(widget.resources.at(index).resource.name),
               MaterialButton(
                 child: Text("-"),
                 onPressed: () {

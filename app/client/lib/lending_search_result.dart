@@ -4,57 +4,49 @@
  ****************************************************************/
 
 import 'package:flutter/material.dart';
+import './resource.dart';
+import './selectable_resource_list.dart';
 
 /****************
  * LendingSearchResult
  * A structure of results of calling lending API.
  ****************/
-class LendingSearchResult{
-  List<int> ids = [];
-  List<bool?> flags = [];
-
-  /****
-   * add()
-   * Adds information of result.
-   * Currently, it stores resource_id and selected_flag.
-   ****/
-  void add(int id, {bool? flag = false}) {
-    ids.add(id);
-    flags.add(flag);
+class LendingSearchResult extends StatefulWidget {
+  SelectableResourceList resources = SelectableResourceList();
+  void add(Resource r) {
+    resources.add(r);
   }
-
-  /****
-   * flush()
-   * Delete all information of result.
-   * It is assumed used when canceled selection.
-   ****/
   void flush() {
-    ids = [];
-    flags = [];
+    resources.flush();
   }
+  List<Resource?> selectedResources() {
+    return resources.selectedResources();
+  }
+  @override
+  _LendingSearchResultState createState() => new _LendingSearchResultState();
+}
 
-  /****
-   * asListOfWidget()
-   * Returns a list of resources.
-   ****/
-  List<Widget> asListOfWidget(BuildContext context) {
+class _LendingSearchResultState extends State<LendingSearchResult> {
+
+  @override
+  Widget build(BuildContext context) {
     List<Widget> list = [];
-    for (int i = 0; i < ids.length; i++) {
+    for (int i = 0; i < widget.resources.length; i++) {
       list.add(
         StatefulBuilder(
-          builder: (context, setState2) {
+          builder: (context, setState) {
             return Card(
               child: Column(
                 children: [
                   ListTile(
                     leading: new Checkbox(
-                      value: flags[i],
+                      value: widget.resources.at(i).flag,
                       onChanged: (bool? b) {
-                        setState2(() {flags[i] = b!;});
+                        setState(() {widget.resources.at(i).flag = b!;});
                       },
                     ),
                     title: Text(i.toString()),
-                    subtitle: Text(ids[i].toString()),
+                    subtitle: Text(widget.resources.at(i).resource.name),
                   ),
                 ],
               ),
@@ -70,14 +62,55 @@ class LendingSearchResult{
         )
       );
     };
-    return list;
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      padding: const EdgeInsets.all(8),
+      itemCount: list.length,
+      itemBuilder: (BuildContext context, int index) {
+        return list[index];
+      },
+    );
   }
 
-  /****
-   * show()
-   * This shows API's result as a modal window.
-   ****/
-  Future show(BuildContext context) {
+  // List<Widget> asListOfWidget(BuildContext context) {
+  //   List<Widget> list = [];
+  //   for (int i = 0; i < ids.length; i++) {
+  //     list.add(
+  //       StatefulBuilder(
+  //         builder: (context, setState2) {
+  //           return Card(
+  //             child: Column(
+  //               children: [
+  //                 ListTile(
+  //                   leading: new Checkbox(
+  //                     value: flags[i],
+  //                     onChanged: (bool? b) {
+  //                       setState2(() {flags[i] = b!;});
+  //                     },
+  //                   ),
+  //                   title: Text(i.toString()),
+  //                   subtitle: Text(ids[i].toString()),
+  //                 ),
+  //               ],
+  //             ),
+  //             color: Colors.white,
+  //             margin: const EdgeInsets.all(10),
+  //             elevation:8,
+  //             shadowColor: Colors.black,
+  //             shape: RoundedRectangleBorder(
+  //               borderRadius: BorderRadius.circular(10),
+  //             ),
+  //           );
+  //         },
+  //       )
+  //     );
+  //   };
+  //   return list;
+  // }
+}
+class LendingModal {
+  static Future show(BuildContext context, LendingSearchResult lsr) {
     final Widget dialog = Dialog(
         child: Container(
           width: double.infinity,
@@ -88,15 +121,13 @@ class LendingSearchResult{
               Text('検索結果'),
               SizedBox(
                 height: 500,
-                child: ListView(
-                  children: asListOfWidget(context),
-                ),
+                child: lsr,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                    onPressed: () {Navigator.pop(context, flags);},
+                    onPressed: () {Navigator.pop(context);},
                     child: Text('Yes'),
                   ),
                   ElevatedButton(

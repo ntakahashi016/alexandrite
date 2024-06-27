@@ -10,7 +10,7 @@ import './main_appbar.dart';
 import './main_drawer.dart';
 import './menu_item.dart';
 import './lending_screen.dart';
-import './returning_screen.dart';
+// import './returning_screen.dart';
 import './wip_screen.dart';
 import './language_dropdown_button.dart';
 
@@ -51,7 +51,8 @@ class MainScreen extends StatelessWidget {
           ),
           ButtonTheme(
             child: MaterialButton(
-              onPressed: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => ReturningScreen()))},
+              onPressed: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => WipScreen()))},
+//              onPressed: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => ReturningScreen()))},
               color: Colors.red,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,

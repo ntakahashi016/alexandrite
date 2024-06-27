@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
  * A structure of results of calling lending API.
  ****************/
 class LendingSearchResult{
-  List<String> ids = [];
+  List<int> ids = [];
   List<bool?> flags = [];
 
   /****
@@ -18,7 +18,7 @@ class LendingSearchResult{
    * Adds information of result.
    * Currently, it stores resource_id and selected_flag.
    ****/
-  void add(String id, {bool? flag = false}) {
+  void add(int id, {bool? flag = false}) {
     ids.add(id);
     flags.add(flag);
   }
@@ -54,7 +54,7 @@ class LendingSearchResult{
                       },
                     ),
                     title: Text(i.toString()),
-                    subtitle: Text(ids[i]),
+                    subtitle: Text(ids[i].toString()),
                   ),
                 ],
               ),

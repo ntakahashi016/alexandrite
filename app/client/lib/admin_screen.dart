@@ -9,8 +9,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import './admin_appbar.dart';
 import './admin_drawer.dart';
 import './menu_item.dart';
-import './resource_registration_screen.dart';
-import './user_registration_screen.dart';
+// import './resource_registration_screen.dart';
+// import './user_registration_screen.dart';
 import './wip_screen.dart';
 
 /****************
@@ -37,7 +37,8 @@ class AdminScreen extends StatelessWidget {
         children: [
           ButtonTheme(
             child: MaterialButton(
-              onPressed: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => UserRegistrationScreen()))},
+              onPressed: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => WipScreen()))},
+//              onPressed: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => UserRegistrationScreen()))},
               color: Colors.blue,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -50,7 +51,8 @@ class AdminScreen extends StatelessWidget {
           ),
           ButtonTheme(
             child: MaterialButton(
-              onPressed: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => ResourceRegistrationScreen()))},
+              onPressed: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => WipScreen()))},
+//              onPressed: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => ResourceRegistrationScreen()))},
               color: Colors.red,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,

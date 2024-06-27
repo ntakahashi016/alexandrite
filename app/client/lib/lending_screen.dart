@@ -6,6 +6,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import './resource.dart';
+import './selectable_resource_list.dart';
 import './main_screen.dart';
 import './main_appbar.dart';
 import './main_drawer.dart';
@@ -18,9 +20,13 @@ import './lending_search_result.dart';
  ****************/
 class LendingScreen extends StatelessWidget {
   final TextEditingController controller = TextEditingController();
-  List<Widget> lendingList = [];
   var lendingSearchResult = LendingSearchResult();
-  var lendingResource = LendingResource();
+  SelectableResourceList resources = SelectableResourceList();
+  LendingResource lendingResource = LendingResource(resources: SelectableResourceList());
+
+  LendingScreen() : super() {
+    lendingResource = LendingResource(resources: resources);
+  }
 
   /***
    * build()
@@ -47,7 +53,7 @@ class LendingScreen extends StatelessWidget {
                     },
                     onSubmitted: (value) async {
                       print("submitted!");
-                      var result = await callLendingAPI(value);
+                      var result = await callLendingAPI(context, value);
                       if (result) { controller.clear(); };
                     },
                     controller: controller,
@@ -57,16 +63,13 @@ class LendingScreen extends StatelessWidget {
                   child: Icon(Icons.add),
                   onPressed: () async {
                     print("add!");
-                    var result = await callLendingAPI(controller.text);
+                    var result = await callLendingAPI(context, controller.text);
                     if (result) { controller.clear(); };
                   },
                 ),
               ]
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: lendingList,
-            ),
+            lendingResource,
             MaterialButton(
               child: Text(AppLocalizations.of(context)!.lend),
               onPressed: () {print("lend!");},
@@ -87,9 +90,9 @@ class LendingScreen extends StatelessWidget {
    * callLendingAPI()
    * This is a temporaly implementation to call APIs.
    ****/
-  Future<bool> callLendingAPI(String value) async {
+  Future<bool> callLendingAPI(BuildContext context, String value) async {
     // call api with value
-    var response = ['XXX','YYY','ZZZ'];
+    var response = [1,2,3];
     var result = false;
     response.forEach((r) => lendingSearchResult.add(r));
     await lendingSearchResult.show(context);
@@ -98,8 +101,9 @@ class LendingScreen extends StatelessWidget {
     if (r) {
       for (int i=0; i<lendingSearchResult.flags.length; i++) {
         if (lendingSearchResult.flags[i]==true) {
-          lendingResource.add(lendingSearchResult.ids[i]);
+          lendingResource.add!(lendingSearchResult.ids[i]);
         };
+        lendingResource.refresh!();
       };
       result = true;
     };

@@ -1,17 +1,39 @@
+/****************************************************************
+ * language_dropdown_button.dart
+ * Be able to select the locale dynamically.
+ ****************************************************************/
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import './main.dart';
 
+/****************
+ * LanguageDropdownButton
+ * Be able to selec the locale dynamically.
+ ****************/
 class LanguageDropdownButton extends StatefulWidget {
   LanguageDropdownButton({super.key});
   static void Function(Locale, bool)? localeSetter;
+
+  /****
+   * setLocaleSetter()
+   * Set callback function to set locale.
+   ****/
   static void setLocaleSetter(void Function(Locale, bool) l) {localeSetter = l;}
 
+  /****
+   * createState()
+   * Creates instance of State
+   ****/
   @override
   State<LanguageDropdownButton> createState() => _LanguageDropdownButton();
 }
 
+/****************
+ * _LanguageDropdownButton
+ * Holds the state of LanguageDropdownButton.
+ ****************/
 class _LanguageDropdownButton extends State<LanguageDropdownButton> {
   static Locale? currentLocale = null;
   static String? currentLanguage = null;
@@ -21,6 +43,10 @@ class _LanguageDropdownButton extends State<LanguageDropdownButton> {
     AppLocalizations.supportedLocales[0].languageCode : AppLocalizations.supportedLocales[0],
   };
 
+  /***
+   * build()
+   * Retruns widget of this class.
+   ***/
   @override
   Widget build(BuildContext context) {
     Map<Locale, String> localeToLanguageMap = {

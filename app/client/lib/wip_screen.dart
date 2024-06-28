@@ -1,25 +1,24 @@
+/****************************************************************
+ * wip_screen.dart
+ * A screen work in progress.
+ ****************************************************************/
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import './main_appbar.dart';
 import './main_drawer.dart';
 
+/****************
+ * WipScreen
+ * Displays a screen work in progress.
+ ****************/
 class WipScreen extends StatelessWidget {
-  const WipScreen({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return WipScreenApp(title: 'Flutter Demo Home Page');
-  }
-}
 
-class WipScreenApp extends StatefulWidget {
-  const WipScreenApp({super.key, required this.title});
-  final String title;
-  @override
-  State<WipScreenApp> createState() => _WipScreenAppState();
-}
-
-class _WipScreenAppState extends State<WipScreenApp> {
+  /***
+   * build()
+   * Retruns widget of this class.
+   ***/
   @override
   Widget build(BuildContext context) {
     return Scaffold(

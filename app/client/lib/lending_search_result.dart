@@ -1,37 +1,57 @@
+/****************************************************************
+ * lending_search_result.dart
+ * A structure of results of calling lending API.
+ ****************************************************************/
+
 import 'package:flutter/material.dart';
+import './resource.dart';
+import './selectable_resource.dart';
 
-class LendingSearchResult{
-  List<String> ids = [];
-  List<bool?> flags = [];
+/****************
+ * LendingSearchResult
+ * A structure of results of calling lending API.
+ ****************/
+class LendingSearchResult extends StatelessWidget {
+  SelectableResourceList resources = SelectableResourceList();
 
-  void add(String id, {bool? flag = false}) {
-    ids.add(id);
-    flags.add(flag);
-  }
+  /****
+   * add()
+   * 
+   ****/
+  void add(Resource r) { resources.add(r); }
 
-  void flush() {
-    ids = [];
-    flags = [];
-  }
+  /****
+   * selectedResources()
+   * 
+   ****/
+  List<Resource?> getSelected() { return resources.getSelected(); }
 
-  List<Widget> asListOfWidget(BuildContext context) {
-    List<Widget> list = [];
-    for (int i = 0; i < ids.length; i++) {
-      list.add(
-        StatefulBuilder(
-          builder: (context, setState2) {
+  /****
+   * build()
+   * 
+   ****/
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      padding: const EdgeInsets.all(8),
+      itemCount: resources.length,
+      itemBuilder: (BuildContext context, int index) {
+        return StatefulBuilder(
+          builder: (context, setState) {
             return Card(
               child: Column(
                 children: [
                   ListTile(
                     leading: new Checkbox(
-                      value: flags[i],
+                      value: resources.at(index).flag,
                       onChanged: (bool? b) {
-                        setState2(() {flags[i] = b!;});
+                        setState(() {resources.at(index).flag = b!;});
                       },
                     ),
-                    title: Text(i.toString()),
-                    subtitle: Text(ids[i]),
+                    title: Text(index.toString()),
+                    subtitle: Text(resources.at(index).name),
                   ),
                 ],
               ),
@@ -44,13 +64,14 @@ class LendingSearchResult{
               ),
             );
           },
-        )
-      );
-    };
-    return list;
+        );
+      },
+    );
   }
+}
 
-  Future show(BuildContext context) {
+class LendingModal {
+  static Future show(BuildContext context, LendingSearchResult lsr) {
     final Widget dialog = Dialog(
         child: Container(
           width: double.infinity,
@@ -61,15 +82,13 @@ class LendingSearchResult{
               Text('検索結果'),
               SizedBox(
                 height: 500,
-                child: ListView(
-                  children: asListOfWidget(context),
-                ),
+                child: lsr,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                    onPressed: () {Navigator.pop(context, flags);},
+                    onPressed: () {Navigator.pop(context);},
                     child: Text('Yes'),
                   ),
                   ElevatedButton(

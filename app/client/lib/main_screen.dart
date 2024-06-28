@@ -1,3 +1,8 @@
+/****************************************************************
+ * main_screen.dart
+ * Specifies a screen for users.
+ ****************************************************************/
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -5,11 +10,20 @@ import './main_appbar.dart';
 import './main_drawer.dart';
 import './menu_item.dart';
 import './lending_screen.dart';
-import './returning_screen.dart';
+// import './returning_screen.dart';
 import './wip_screen.dart';
 import './language_dropdown_button.dart';
 
+/****************
+ * MainScreen
+ * Displays a screen for users.
+ ****************/
 class MainScreen extends StatelessWidget {
+
+  /****
+   * build()
+   * Retruns widget of this class.
+   ****/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +51,8 @@ class MainScreen extends StatelessWidget {
           ),
           ButtonTheme(
             child: MaterialButton(
-              onPressed: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => ReturningScreen()))},
+              onPressed: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => WipScreen()))},
+//              onPressed: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => ReturningScreen()))},
               color: Colors.red,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,

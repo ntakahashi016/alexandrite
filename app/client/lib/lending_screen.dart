@@ -1,45 +1,30 @@
+/****************************************************************
+ * lending_screen.dart
+ * A screen to lend resource.
+ ****************************************************************/
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import './main_screen.dart';
+import './resource.dart';
+import './selectable_resource.dart';
 import './main_appbar.dart';
 import './main_drawer.dart';
 import './lending_resource.dart';
 import './lending_search_result.dart';
 
+/****************
+ * LendingScreen
+ * Displays a screen to lend resource.
+ ****************/
 class LendingScreen extends StatelessWidget {
-  const LendingScreen({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return LendingScreenApp(title: 'Flutter Demo Home Page');
-  }
-}
-
-class LendingScreenApp extends StatefulWidget {
-  const LendingScreenApp({super.key, required this.title});
-  final String title;
-  @override
-  State<LendingScreenApp> createState() => _LendingScreenAppState();
-}
-
-class _LendingScreenAppState extends State<LendingScreenApp> {
   final TextEditingController controller = TextEditingController();
-  List<Widget> lendingList = [];
-  var lendingSearchResult = LendingSearchResult();
   var lendingResource = LendingResource();
 
-  void refresh() {
-    setState(() {
-      lendingList = lendingResource.asListOfWidget();
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    LendingResource.setCallbackFunction(refresh);
-  }
-
+  /***
+   * build()
+   * Retruns widget of this class.
+   ***/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +46,7 @@ class _LendingScreenAppState extends State<LendingScreenApp> {
                     },
                     onSubmitted: (value) async {
                       print("submitted!");
-                      var result = await callLendingAPI(value);
+                      var result = await callLendingAPI(context, value);
                       if (result) { controller.clear(); };
                     },
                     controller: controller,
@@ -71,16 +56,13 @@ class _LendingScreenAppState extends State<LendingScreenApp> {
                   child: Icon(Icons.add),
                   onPressed: () async {
                     print("add!");
-                    var result = await callLendingAPI(controller.text);
+                    var result = await callLendingAPI(context, controller.text);
                     if (result) { controller.clear(); };
                   },
                 ),
               ]
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: lendingList,
-            ),
+            lendingResource,
             MaterialButton(
               child: Text(AppLocalizations.of(context)!.lend),
               onPressed: () {print("lend!");},
@@ -97,23 +79,25 @@ class _LendingScreenAppState extends State<LendingScreenApp> {
     );
   }
 
-  Future<bool> callLendingAPI(String value) async {
+  /****
+   * callLendingAPI()
+   * This is a temporaly implementation to call APIs.
+   ****/
+  Future<bool> callLendingAPI(BuildContext context, String value) async {
+    var lendingSearchResult = LendingSearchResult();
     // call api with value
-    var response = ['XXX','YYY','ZZZ'];
+    var response = [Resource(1, "XXX"), Resource(2, "YYY"), Resource(3, "ZZZ")];
     var result = false;
-    response.forEach((r) => lendingSearchResult.add(r));
-    await lendingSearchResult.show(context);
-    var r = false;
-    lendingSearchResult.flags.forEach((f) => r|=f!);
-    if (r) {
-      for (int i=0; i<lendingSearchResult.flags.length; i++) {
-        if (lendingSearchResult.flags[i]==true) {
-          lendingResource.add(lendingSearchResult.ids[i]);
-        };
-      };
+    response.forEach(lendingSearchResult.add);
+    await LendingModal.show!(context, lendingSearchResult);
+    var selected = lendingSearchResult.getSelected();
+    if (!selected.isEmpty) {
+      selected.forEach ((r) {
+          lendingResource.add(r!);
+      });
+      lendingResource.refresh!();
       result = true;
     };
-    lendingSearchResult.flush();
     return result;
   }
 }

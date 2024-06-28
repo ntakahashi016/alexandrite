@@ -1,3 +1,8 @@
+/****************************************************************
+ * main_drawer.dart
+ * A part of screens for user.
+ ****************************************************************/
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -5,7 +10,16 @@ import './menu_item.dart';
 import './admin_screen.dart';
 import './wip_screen.dart';
 
+/****************
+ * MainDrawer
+ * A customized Drawer for users.
+ ****************/
 class MainDrawer extends Drawer {
+
+  /****
+   * constructor
+   * Returns Drawer customized for users.
+   ****/
   MainDrawer(BuildContext context) : super(
     child: Column(
       children: [

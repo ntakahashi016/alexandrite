@@ -1,43 +1,65 @@
+/****************************************************************
+ * lending_resource.dart
+ * 
+ ****************************************************************/
+
 import 'package:flutter/material.dart';
-import './lending_screen.dart';
+import './resource.dart';
+import './selectable_resource.dart';
 
-class LendingResource {
-  List<String> ids = [];
-  static void Function()? _callback;
+/****************
+ * LendingResource
+ * 
+ ****************/
+class LendingResource extends StatefulWidget {
+  SelectableResourceList resources = SelectableResourceList();
+  void Function()? refresh;
+  void setRefreshFunction(void Function() func) { refresh = func; }
+  void add(Resource r) { resources.add(r); }
+  @override
+  _LendingResourceState createState() => new _LendingResourceState();
+}
 
-  static void setCallbackFunction(void Function() func) {
-     _callback = func;
+class _LendingResourceState extends State<LendingResource> {
+
+  void refresh() {
+    setState(() {});
   }
 
-  void add(String id) {
-    if (id=="") { return; };
-    ids.add(id);
-    _callback?.call();
+  @override
+  void initState() {
+    widget.setRefreshFunction(refresh);
   }
 
-  void deleteAt(int index) {
-    if (index<0 && index>=ids.length) { return; };
-    ids.removeAt(index);
-    _callback?.call();
-  }
-
-  List<Widget> asListOfWidget() {
-    return ids.asMap().entries.map((e) =>
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text((e.key+1).toString()),
-          Text(e.value),
-          MaterialButton(
-            child: Text("-"),
-            onPressed: () {
-              print("delete!");
-              this.deleteAt(e.key);
-            },
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      padding: const EdgeInsets.all(8),
+      itemCount: widget.resources.length,
+      itemBuilder: (BuildContext context, int index) {
+        return Container(
+          height: 50,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text((index+1).toString()),
+              Text(widget.resources.at(index).name),
+              MaterialButton(
+                child: Text("-"),
+                onPressed: () {
+                  setState(() {
+                    print("delete!");
+                    widget.resources.deleteAt(index);
+                  });
+                },
+              ),
+            ],
           ),
-        ]
-      )
-    ).toList();
+        );
+      },
+    );
   }
 }
 

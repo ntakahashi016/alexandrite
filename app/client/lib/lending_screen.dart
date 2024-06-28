@@ -7,8 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import './resource.dart';
-import './selectable_resource_list.dart';
-import './main_screen.dart';
+import './selectable_resource.dart';
 import './main_appbar.dart';
 import './main_drawer.dart';
 import './lending_resource.dart';
@@ -20,7 +19,6 @@ import './lending_search_result.dart';
  ****************/
 class LendingScreen extends StatelessWidget {
   final TextEditingController controller = TextEditingController();
-  var lendingSearchResult = LendingSearchResult();
   var lendingResource = LendingResource();
 
   /***
@@ -86,12 +84,13 @@ class LendingScreen extends StatelessWidget {
    * This is a temporaly implementation to call APIs.
    ****/
   Future<bool> callLendingAPI(BuildContext context, String value) async {
+    var lendingSearchResult = LendingSearchResult();
     // call api with value
     var response = [Resource(1, "XXX"), Resource(2, "YYY"), Resource(3, "ZZZ")];
     var result = false;
     response.forEach(lendingSearchResult.add);
     await LendingModal.show!(context, lendingSearchResult);
-    var selected = lendingSearchResult.selectedResources();
+    var selected = lendingSearchResult.getSelected();
     if (!selected.isEmpty) {
       selected.forEach ((r) {
           lendingResource.add(r!);
@@ -99,7 +98,6 @@ class LendingScreen extends StatelessWidget {
       lendingResource.refresh!();
       result = true;
     };
-    lendingSearchResult.flush();
     return result;
   }
 }

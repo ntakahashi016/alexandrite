@@ -5,48 +5,53 @@
 
 import 'package:flutter/material.dart';
 import './resource.dart';
-import './selectable_resource_list.dart';
+import './selectable_resource.dart';
 
 /****************
  * LendingSearchResult
  * A structure of results of calling lending API.
  ****************/
-class LendingSearchResult extends StatefulWidget {
+class LendingSearchResult extends StatelessWidget {
   SelectableResourceList resources = SelectableResourceList();
-  void add(Resource r) {
-    resources.add(r);
-  }
-  void flush() {
-    resources.flush();
-  }
-  List<Resource?> selectedResources() {
-    return resources.selectedResources();
-  }
-  @override
-  _LendingSearchResultState createState() => new _LendingSearchResultState();
-}
 
-class _LendingSearchResultState extends State<LendingSearchResult> {
+  /****
+   * add()
+   * 
+   ****/
+  void add(Resource r) { resources.add(r); }
 
+  /****
+   * selectedResources()
+   * 
+   ****/
+  List<Resource?> getSelected() { return resources.getSelected(); }
+
+  /****
+   * build()
+   * 
+   ****/
   @override
   Widget build(BuildContext context) {
-    List<Widget> list = [];
-    for (int i = 0; i < widget.resources.length; i++) {
-      list.add(
-        StatefulBuilder(
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      padding: const EdgeInsets.all(8),
+      itemCount: resources.length,
+      itemBuilder: (BuildContext context, int index) {
+        return StatefulBuilder(
           builder: (context, setState) {
             return Card(
               child: Column(
                 children: [
                   ListTile(
                     leading: new Checkbox(
-                      value: widget.resources.at(i).flag,
+                      value: resources.at(index).flag,
                       onChanged: (bool? b) {
-                        setState(() {widget.resources.at(i).flag = b!;});
+                        setState(() {resources.at(index).flag = b!;});
                       },
                     ),
-                    title: Text(i.toString()),
-                    subtitle: Text(widget.resources.at(i).resource.name),
+                    title: Text(index.toString()),
+                    subtitle: Text(resources.at(index).name),
                   ),
                 ],
               ),
@@ -59,56 +64,12 @@ class _LendingSearchResultState extends State<LendingSearchResult> {
               ),
             );
           },
-        )
-      );
-    };
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      padding: const EdgeInsets.all(8),
-      itemCount: list.length,
-      itemBuilder: (BuildContext context, int index) {
-        return list[index];
+        );
       },
     );
   }
-
-  // List<Widget> asListOfWidget(BuildContext context) {
-  //   List<Widget> list = [];
-  //   for (int i = 0; i < ids.length; i++) {
-  //     list.add(
-  //       StatefulBuilder(
-  //         builder: (context, setState2) {
-  //           return Card(
-  //             child: Column(
-  //               children: [
-  //                 ListTile(
-  //                   leading: new Checkbox(
-  //                     value: flags[i],
-  //                     onChanged: (bool? b) {
-  //                       setState2(() {flags[i] = b!;});
-  //                     },
-  //                   ),
-  //                   title: Text(i.toString()),
-  //                   subtitle: Text(ids[i].toString()),
-  //                 ),
-  //               ],
-  //             ),
-  //             color: Colors.white,
-  //             margin: const EdgeInsets.all(10),
-  //             elevation:8,
-  //             shadowColor: Colors.black,
-  //             shape: RoundedRectangleBorder(
-  //               borderRadius: BorderRadius.circular(10),
-  //             ),
-  //           );
-  //         },
-  //       )
-  //     );
-  //   };
-  //   return list;
-  // }
 }
+
 class LendingModal {
   static Future show(BuildContext context, LendingSearchResult lsr) {
     final Widget dialog = Dialog(

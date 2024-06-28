@@ -17,4 +17,5 @@ class Resource {
    * constructor
    ****/
   Resource(this.id, this.name);
+  Resource.copy(Resource r) : this(r.id, r.name);
 }

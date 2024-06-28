@@ -1,15 +1,15 @@
 /****************************************************************
- * selectable_resource_list.dart
+ * selectable_resource.dart
  * A list of Resource with boolian flag.
  ****************************************************************/
 
 import 'package:flutter/material.dart';
 import './resource.dart';
 
-class SelectableResource {
-  Resource resource;
+class SelectableResource extends Resource {
   bool flag;
-  SelectableResource(this.resource, this.flag);
+  SelectableResource(super.id, super.name, this.flag);
+  SelectableResource.convert(Resource r, this.flag) : super.copy(r);
 }
 
 /****************
@@ -22,7 +22,7 @@ class SelectableResourceList {
   int get length => resources.length;
 
   void add(Resource r, {bool b = false}) {
-    resources.add(SelectableResource(r,b));
+    resources.add(SelectableResource.convert(r, b));
   }
 
   void deleteAt(int i) {
@@ -30,16 +30,12 @@ class SelectableResourceList {
     resources.removeAt(i);
   }
 
-  void flush() {
-    resources = [];
-  }
-
   SelectableResource at(int i) {
     return resources[i];
   }
 
-  List<Resource?> selectedResources() {
-    var result = resources.map((sr) => sr.flag ? sr.resource : null).toList();
+  List<Resource?> getSelected() {
+    var result = resources.map((sr) => sr.flag ? sr : null).toList();
     result.removeWhere((r) => r == null);
     return result;
   }

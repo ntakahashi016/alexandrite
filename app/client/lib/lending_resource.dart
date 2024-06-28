@@ -5,7 +5,7 @@
 
 import 'package:flutter/material.dart';
 import './resource.dart';
-import './selectable_resource_list.dart';
+import './selectable_resource.dart';
 
 /****************
  * LendingResource
@@ -15,9 +15,7 @@ class LendingResource extends StatefulWidget {
   SelectableResourceList resources = SelectableResourceList();
   void Function()? refresh;
   void setRefreshFunction(void Function() func) { refresh = func; }
-  void add(Resource r) {
-    resources.add(r);
-  }
+  void add(Resource r) { resources.add(r); }
   @override
   _LendingResourceState createState() => new _LendingResourceState();
 }
@@ -47,7 +45,7 @@ class _LendingResourceState extends State<LendingResource> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text((index+1).toString()),
-              Text(widget.resources.at(index).resource.name),
+              Text(widget.resources.at(index).name),
               MaterialButton(
                 child: Text("-"),
                 onPressed: () {
